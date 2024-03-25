@@ -1,0 +1,58 @@
+.logo-icon{
+    position: relative;
+    display: block;
+    margin: auto;
+}
+
+.content{
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 0px;
+  gap: 50px;
+}
+
+.course{
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 0px;
+
+  width: 812px;
+  height: 63px;
+}
+
+.input-course{
+  width: 812px;
+  height: 43px;
+  padding-left: 10px;
+}
+
+.grid{
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding-left: 150px;
+  gap: 50px;
+}
+
+table, th{
+  border-collapse: collapse;
+  border: 1px solid black;
+  padding: 5px;
+}
+
+table{
+  width: 812px;
+  margin-left: 8px;
+}
+
+th{
+  background-color: #D5DBDF;
+  text-align: center;
+}
+
+td{
+  border-collapse: collapse;
+  border: 1px inset #B9B9B9;
+}

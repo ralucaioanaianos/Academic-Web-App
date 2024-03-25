@@ -1,0 +1,16 @@
+<!-- <form class="automatic-opt" #dropdownForm="ngForm" novalidate>
+  <label class="automatic-opt">Test</label>
+  <select class="placeholder-select automatic-opt" name="id">
+    <option value="" disabled selected hidden >{{placeholderText}}</option>
+    <option *ngFor="let entity of entities">{{entity.id}}</option>
+  </select>
+  
+</form>
+
+-->
+
+<label class="dropdown-label" for="sites">{{labelText}}</label><br>
+<select id="sites" class="dropdown-container" [(ngModel)]="selectedOption" required (ngModelChange)="selected()">
+    <option *ngIf="hasAll" [ngValue]="" selected>{{placeholderText}}</option>
+    <option *ngFor="let option of options" [ngValue]="option[idProperty]">{{option[shownProperty]}}</option>
+</select>

@@ -1,0 +1,52 @@
+<div class="container">
+    <h1 mat-dialog-title>{{action}} Optional</h1>
+    <div mat-dialog-content>
+        <mat-form-field *ngIf="action != 'Delete'; else deleteTemplate">
+            <input [disabled]="action=='See'" placeholder="Title" matInput [(ngModel)]="local_data.name">
+        </mat-form-field>
+        <br>
+        <mat-form-field *ngIf="action != 'Delete'">
+            <mat-label>Faculty</mat-label>
+            <mat-select [disabled]="action=='See'" [(ngModel)]="local_data.fid" name="Faculty">
+                <mat-option #matOption *ngFor="let faculty_option of dropdownData['facultyOptions']" [value]="faculty_option.value" (click)="getYears(matOption)">
+                {{faculty_option.viewValue}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+        <br>
+        <mat-form-field *ngIf="action != 'Delete'">
+            <mat-label>Year</mat-label>
+            <mat-select [disabled]="action=='See'" [(ngModel)]="local_data.year" name="Year" (selectionChange)="getSemesters(local_data.year)">
+                <mat-option *ngFor="let year_option of dropdownData['yearOptions']" [value]="year_option">
+                {{year_option}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+        <br>
+        <mat-form-field *ngIf="action != 'Delete'">
+            <mat-label>Semester</mat-label>
+            <mat-select [disabled]="action=='See'" [(ngModel)]="local_data.semester" name="Semester">
+                <mat-option *ngFor="let semester_option of dropdownData['semesterOptions']" [value]="semester_option">
+                {{semester_option}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+        <br>
+        <mat-form-field *ngIf="action != 'Delete'">
+            <mat-label>Credits</mat-label>
+            <mat-select [disabled]="action=='See'" [(ngModel)]="local_data.credits" name="Credits">
+                <mat-option *ngFor="let credits_option of dropdownData['creditsOptions']" [value]="credits_option">
+                {{credits_option}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+
+        <ng-template #deleteTemplate>
+            Sure to delete <b>{{local_data.name}}</b>?
+        </ng-template>
+    </div>
+    <div mat-dialog-actions>
+    <app-button [text]="(action!='See') ? (action + ' optional') : 'Close'" mat-button (click)="doAction()"></app-button>
+    <button *ngIf="action!='See'" mat-button (click)="closeDialog()">Cancel</button>
+    </div>
+</div>

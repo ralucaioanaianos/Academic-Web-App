@@ -1,0 +1,35 @@
+<div class="container text-center mt-5">
+  <h3 class="mb-5"> Drop zone angular file drag and drop example. </h3>
+  <!-- Apply DropZone Directive -->﻿
+  <div class="dropzone" DragAndDrop (onFileDropped)="droppedFiles($event)">
+    <div class="text-center">
+      Drop files here.<BR>
+      <span class="note needsclick">(This is just a demo dropzone. Selected
+        files are <strong>not</strong> actually uploaded.)</span>
+    </div>
+  </div>
+  <div class="file-table">
+    <h3 class="m-3">List of Files</h3>
+    <table class="table">
+      <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">File Name</th>
+        <th scope="col">Size</th>
+        <th scope="col">Type</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let file of allFiles; let i = index">
+        <th scope="row">{{i+1}}</th>
+        <td>{{file.name}}</td>
+        <td>{{file.size}} Bytes</td>
+        <td>{{file.type}}</td>
+      </tr>
+      <tr class="text-center" *ngIf="allFiles.length === 0">
+        <td colspan="4"><strong>No files are uploaded</strong></td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

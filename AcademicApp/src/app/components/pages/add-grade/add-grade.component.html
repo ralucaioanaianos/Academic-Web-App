@@ -1,0 +1,19 @@
+<div class="container" [style.padding]="pagePadding">
+  <img class="logo-icon" src="assets/logo.svg" [style.width]="logoWidth">
+  <div class="content" [style.padding]="contentPadding">
+      <dropdown #coursesDd 
+        [options]="options" 
+        placeholderText="All courses" 
+        labelText="Choose course"
+        [shownProperty] = "nameOfPropertyToShow"
+        idProperty="cid"
+        [hasAll]="false"
+        (change)='onOptionChanged()'>
+      </dropdown>
+      <app-table #table [headers]="tableHeaders" [objectsFromDb]="tableData" [hasCheckbox]="false" [hasAction]="true" [hasGrade]="true" ></app-table>
+      <!-- <app-button [text]="'Save modifications'" (click)="approveOptionalsButton()"></app-button> -->
+      <div class="text">
+          <p>To <span [style]="blueText">change the grade of a student</span>, click on the "Edit Grade" button on its row.</p>
+      </div>
+  </div>
+</div>

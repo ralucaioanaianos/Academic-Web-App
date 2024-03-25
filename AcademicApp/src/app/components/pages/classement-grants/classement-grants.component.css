@@ -1,0 +1,52 @@
+.logo-icon{
+    position: relative;
+    display: block;
+    margin: auto;
+}
+
+.drop-component {
+    margin-right: 500px;
+}
+
+.funding-part {
+    position: absolute;
+    right: 50px;
+    top: 150px;
+    margin-right: 100px;
+}
+
+h2 {
+    font-size: 30px;
+}
+
+input {
+    width: 200px;
+    border-radius: 5px;
+}
+
+.classement-part {
+    width: 50%;
+}
+
+h3 {
+    margin-top: 50px;
+}
+
+.btn-pr{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  color: white;
+  width: 167px;
+  height: 40px;
+  border: 1px solid red;
+  background-color: red;
+  border-radius: 7px;
+  margin-left: 10px;
+}
+
+
+
+

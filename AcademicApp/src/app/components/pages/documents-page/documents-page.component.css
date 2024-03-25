@@ -1,0 +1,41 @@
+.logo-icon{
+    position: relative;
+    display: block;
+    margin: auto;
+}
+
+.drop-component {
+    margin-right: 500px;
+}
+
+.generate-contract-component {
+    position: absolute;
+    right: 50px;
+    top: 150px;
+    margin-right: 100px;
+}
+
+dropdown {
+    width: 300px;
+    height: 43px;
+}
+
+.drag-and-drop{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 0px;
+    gap: 34px;
+}
+/*.drag-and-drop {
+    display: flex;
+    position: absolute;
+}*/
+
+/*
+radu: burger de vita, cartofi cu sos iute
+mario: burger de pui x3
+cartofi cu usturoi
+cartofi cu salsa
+
+*/

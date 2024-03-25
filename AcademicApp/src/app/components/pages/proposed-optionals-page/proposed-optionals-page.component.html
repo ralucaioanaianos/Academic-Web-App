@@ -1,0 +1,47 @@
+<div class="container" [style.padding]="pagePadding">
+  <img class="logo-icon" src="assets/logo.svg" [style.width]="logoWidth">
+  <div class="content" [style.padding]="contentPadding">
+    <div class="grid">
+      <div>
+        <h4 class="text-center">Available optionals</h4>
+        <cdk-virtual-scroll-viewport itemSize="50" class="example-viewport">
+          <mat-chip-list
+            class="mat-chip-list-stacked"
+            cdkDropList
+            #optionalList="cdkDropList"
+            [cdkDropListData]="optionals"
+            [cdkDropListConnectedTo]="[chosenOptionalList]"
+            (cdkDropListDropped)="drop($event)"
+            [cdkDropListEnterPredicate]="optionalsPredicate">
+            <mat-chip *ngFor="let optional of optionals" class="example-item" cdkDrag>
+              {{ optional.name }}
+            </mat-chip>
+          </mat-chip-list>
+        </cdk-virtual-scroll-viewport>
+      </div>
+      <div>
+        <h4  class="text-center">Chosen optionals</h4>
+        <cdk-virtual-scroll-viewport itemSize="50" class="example-viewport">
+          <mat-chip-list
+            class="mat-chip-list-stacked"
+            cdkDropList
+            #chosenOptionalList="cdkDropList"
+            [cdkDropListData]="chosenOptionals"
+            [cdkDropListConnectedTo]="[optionalList]"
+            (cdkDropListDropped)="drop($event)"
+            [cdkDropListEnterPredicate]="chosenOptionalsPredicate">
+            <mat-chip *ngFor="let chosenOptional of chosenOptionals" class="example-item" cdkDrag>
+              {{ chosenOptional.name }}
+            </mat-chip>
+          </mat-chip-list>
+        </cdk-virtual-scroll-viewport>
+      </div>
+    </div>
+    <button [disabled]="disabled" class="send-button" (click)="sendOptionals()">Send</button>
+    <div class="text-padding">
+      <p><span class="text-color">Attention!</span> Sending the optionals will update your preferences everytime.</p>
+      <p>*You can achieve the ranking by <span class="text-color">drag and drop</span></p>
+    </div>
+
+  </div>
+</div>

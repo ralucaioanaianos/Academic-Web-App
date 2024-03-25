@@ -1,0 +1,39 @@
+{
+  "students": [
+    {
+      "id": 1,
+      "username": "student1",
+      "password": "passwords1"
+    },
+    {
+      "id": 2,
+      "username": "student2",
+      "password": "passwords2"
+    }
+  ],
+  "teachers": [
+    {
+      "id": 1,
+      "username": "teacher1",
+      "password": "passwordt1"
+    },
+    {
+      "id": 2,
+      "username": "teacher2",
+      "password": "passwordt2"
+    }
+  ],
+  "admins": [
+    {
+      "id": 1,
+      "username": "admin1",
+      "password": "passworda1"
+    },
+    {
+      "id": 2,
+      "username": "admin2",
+      "password": "passworda2"
+    }
+  ]
+    
+}

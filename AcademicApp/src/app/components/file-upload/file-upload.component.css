@@ -1,0 +1,9 @@
+.file-input {
+  display: none;
+}
+
+.box{
+  box-sizing: border-box;
+  border: 1px solid gray;
+  width: 350px;
+}

@@ -1,0 +1,69 @@
+.logo-icon{
+    position: relative;
+    display: block;
+    margin: auto;
+}
+
+.content{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0px;
+    gap: 1rem;
+}
+
+.tables {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    gap: 6rem;
+}
+
+.select-faculty{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.year-container{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.select-year{
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    gap: 1rem;
+}
+
+.yearFaculty1 {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.yearFaculty2 {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.btn-primary {
+    background-color: #50ACF9 !important;
+}
+
+.text-color{
+    color: #50ACF9;
+    font-weight: bold;
+  }
+
+  .same-row{
+      display: flex;
+      flex-direction: row;
+      gap: 15rem;
+  }
+
+

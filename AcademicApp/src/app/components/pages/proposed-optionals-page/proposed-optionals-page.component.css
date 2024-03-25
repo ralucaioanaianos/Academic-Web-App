@@ -1,0 +1,119 @@
+.logo-icon{
+    position: relative;
+    display: block;
+    margin: auto;
+}
+
+.grid{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 0px;
+  gap: 34px;
+}
+
+.example-list {
+  width: 741px;
+  max-width: 100%;
+  border: solid 1px #ccc;
+  min-height: 60px;
+  display: block;
+  background: white;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.example-box {
+  padding: 20px 10px;
+  border-bottom: solid 1px #ccc;
+  color: rgba(0, 0, 0, 0.87);
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  box-sizing: border-box;
+  cursor: move;
+  background: white;
+  font-size: 14px;
+  width: 741px;
+  height: 44px;
+}
+
+.cdk-drag-preview {
+  box-sizing: border-box;
+  border-radius: 4px;
+  box-shadow: 0 5px 5px -3px rgba(0, 0, 0, 0.2),
+  0 8px 10px 1px rgba(0, 0, 0, 0.14),
+  0 3px 14px 2px rgba(0, 0, 0, 0.12);
+}
+
+.cdk-drag-placeholder {
+  opacity: 0;
+}
+
+.cdk-drag-animating {
+  transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
+}
+
+.example-box:last-child {
+  border: none;
+}
+
+.example-list.cdk-drop-list-dragging .example-box:not(.cdk-drag-placeholder) {
+  transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
+}
+
+.send-button{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 8px 59px;
+  gap: 10px;
+  color: white;
+  width: 167px;
+  height: 40px;
+  border: 1px solid #50ACF9;
+  background-color: #50ACF9;
+  border-radius: 7px;
+}
+
+.text-color{
+  color: #50ACF9;
+  font-weight: bold;
+}
+
+.content{
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 2rem;
+}
+
+/* for scrolling */
+
+.example-viewport {
+  height: 300px;
+  width: 500px;
+  border: 1px solid rgb(255, 255, 255);
+}
+
+.example-item {
+  box-shadow: 1px 1px 1px 1px #d3d3d3;
+  text-align: center;
+  height: 50px;
+  cursor: move;
+}
+
+.mat-chip-list-stacked{
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  cursor: grabbing;
+}
+
+.text-center{
+  text-align: center;
+}

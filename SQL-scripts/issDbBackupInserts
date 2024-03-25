@@ -1,0 +1,1696 @@
+--
+-- PostgreSQL database dump
+--
+
+-- Dumped from database version 14.2
+-- Dumped by pg_dump version 14.2
+
+-- Started on 2022-05-07 21:10:14
+
+SET statement_timeout = 0;
+SET lock_timeout = 0;
+SET idle_in_transaction_session_timeout = 0;
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = on;
+SELECT pg_catalog.set_config('search_path', '', false);
+SET check_function_bodies = false;
+SET xmloption = content;
+SET client_min_messages = warning;
+SET row_security = off;
+
+DROP DATABASE "ISS2";
+--
+-- TOC entry 3407 (class 1262 OID 16720)
+-- Name: ISS2; Type: DATABASE; Schema: -; Owner: postgres
+--
+
+CREATE DATABASE "ISS2" WITH TEMPLATE = template0 ENCODING = 'UTF8' LOCALE = 'Romanian_Romania.1252';
+
+
+ALTER DATABASE "ISS2" OWNER TO postgres;
+
+\connect "ISS2"
+
+SET statement_timeout = 0;
+SET lock_timeout = 0;
+SET idle_in_transaction_session_timeout = 0;
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = on;
+SELECT pg_catalog.set_config('search_path', '', false);
+SET check_function_bodies = false;
+SET xmloption = content;
+SET client_min_messages = warning;
+SET row_security = off;
+
+SET default_tablespace = '';
+
+SET default_table_access_method = heap;
+
+--
+-- TOC entry 209 (class 1259 OID 16721)
+-- Name: course; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.course (
+    cid integer NOT NULL,
+    name character varying NOT NULL,
+    fid integer NOT NULL,
+    year integer NOT NULL,
+    teacher character varying,
+    semester integer,
+    maxstudents integer NOT NULL,
+    priority integer NOT NULL
+);
+
+
+ALTER TABLE public.course OWNER TO postgres;
+
+--
+-- TOC entry 220 (class 1259 OID 16883)
+-- Name: course_priority; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.course_priority (
+    pid integer NOT NULL,
+    priority character varying(25) NOT NULL
+);
+
+
+ALTER TABLE public.course_priority OWNER TO postgres;
+
+--
+-- TOC entry 210 (class 1259 OID 16728)
+-- Name: faculty; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.faculty (
+    fid integer NOT NULL,
+    name character varying NOT NULL,
+    noyears integer NOT NULL,
+    chief character varying
+);
+
+
+ALTER TABLE public.faculty OWNER TO postgres;
+
+--
+-- TOC entry 211 (class 1259 OID 16735)
+-- Name: grade; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.grade (
+    gradevalue integer NOT NULL,
+    username character varying NOT NULL,
+    cid integer NOT NULL
+);
+
+
+ALTER TABLE public.grade OWNER TO postgres;
+
+--
+-- TOC entry 212 (class 1259 OID 16742)
+-- Name: group; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public."group" (
+    gid integer NOT NULL,
+    faculty integer NOT NULL,
+    year integer NOT NULL
+);
+
+
+ALTER TABLE public."group" OWNER TO postgres;
+
+--
+-- TOC entry 213 (class 1259 OID 16747)
+-- Name: optional_course; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.optional_course (
+    cid integer NOT NULL,
+    username character varying
+);
+
+
+ALTER TABLE public.optional_course OWNER TO postgres;
+
+--
+-- TOC entry 214 (class 1259 OID 16754)
+-- Name: optional_course_enrollment; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.optional_course_enrollment (
+    username character varying(255) NOT NULL,
+    cid integer NOT NULL
+);
+
+
+ALTER TABLE public.optional_course_enrollment OWNER TO postgres;
+
+--
+-- TOC entry 215 (class 1259 OID 16761)
+-- Name: staff; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.staff (
+    username character varying NOT NULL,
+    name character varying NOT NULL
+);
+
+
+ALTER TABLE public.staff OWNER TO postgres;
+
+--
+-- TOC entry 216 (class 1259 OID 16768)
+-- Name: student; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.student (
+    name character varying NOT NULL,
+    username character varying NOT NULL,
+    group1 integer NOT NULL,
+    group2 integer
+);
+
+
+ALTER TABLE public.student OWNER TO postgres;
+
+--
+-- TOC entry 217 (class 1259 OID 16775)
+-- Name: studentenrollment; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.studentenrollment (
+    username character varying NOT NULL,
+    fid integer NOT NULL,
+    year integer NOT NULL
+);
+
+
+ALTER TABLE public.studentenrollment OWNER TO postgres;
+
+--
+-- TOC entry 218 (class 1259 OID 16782)
+-- Name: teacher; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.teacher (
+    username character varying NOT NULL,
+    name character varying NOT NULL
+);
+
+
+ALTER TABLE public.teacher OWNER TO postgres;
+
+--
+-- TOC entry 219 (class 1259 OID 16789)
+-- Name: user; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public."user" (
+    username character varying NOT NULL,
+    password character varying NOT NULL,
+    role character varying NOT NULL
+);
+
+
+ALTER TABLE public."user" OWNER TO postgres;
+
+--
+-- TOC entry 3390 (class 0 OID 16721)
+-- Dependencies: 209
+-- Data for Name: course; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+INSERT INTO public.course VALUES (1, 'Algebra', 1, 1, 'rickeymercado', 1, 163, 1);
+INSERT INTO public.course VALUES (2, 'Fundamentele programarii', 1, 1, 'charlesmcbride', 1, 204, 1);
+INSERT INTO public.course VALUES (3, 'Arhitectura sistemelor de calcul', 1, 1, 'jeffcooper', 1, 153, 1);
+INSERT INTO public.course VALUES (4, 'Programare in c', 1, 1, 'johnavila', 1, 178, 3);
+INSERT INTO public.course VALUES (5, 'Structuri de date si algoritmi', 1, 1, 'christiankleinpeter', 2, 175, 1);
+INSERT INTO public.course VALUES (6, 'Geometrie', 1, 1, 'nancygood', 2, 192, 1);
+INSERT INTO public.course VALUES (7, 'Sisteme dinamice', 1, 1, 'daviddailey', 2, 169, 1);
+INSERT INTO public.course VALUES (8, 'Metode avansate de rezolvare a problemelor de matematica şi informatica', 1, 1, 'johnavila', 2, 206, 3);
+INSERT INTO public.course VALUES (9, 'Metode avansate de programare', 1, 2, 'markwillie', 3, 206, 1);
+INSERT INTO public.course VALUES (10, 'Retele de calculatoare', 1, 2, 'davidgouldman', 3, 197, 1);
+INSERT INTO public.course VALUES (11, 'Baze de date', 1, 2, 'sonjasievers', 3, 180, 1);
+INSERT INTO public.course VALUES (12, 'Programare functionala si logica', 1, 2, 'helensees', 3, 204, 1);
+INSERT INTO public.course VALUES (13, 'Inteligenta artificiala', 1, 2, 'rickeymercado', 4, 189, 1);
+INSERT INTO public.course VALUES (14, 'Ingineria sistemelor soft', 1, 2, 'paulsteele', 4, 214, 1);
+INSERT INTO public.course VALUES (15, 'Medii de proiectare si programare', 1, 2, 'lindaparish', 4, 162, 1);
+INSERT INTO public.course VALUES (16, 'Programare web', 1, 2, 'williambrandon', 4, 196, 1);
+INSERT INTO public.course VALUES (17, 'Programare paralela si distribuita', 1, 3, 'jeremydiller', 5, 193, 1);
+INSERT INTO public.course VALUES (18, 'Programare pentru dispozitive mobile', 1, 3, 'rickeymercado', 5, 206, 1);
+INSERT INTO public.course VALUES (19, 'Criptografie cu cheie publica', 1, 3, 'maryschober', 5, 192, 2);
+INSERT INTO public.course VALUES (20, 'Protocoale specializate in retele de calculatoare', 1, 3, 'charlespress', 5, 171, 2);
+INSERT INTO public.course VALUES (21, 'Proiect de cercetare', 1, 3, 'christiankleinpeter', 5, 151, 2);
+INSERT INTO public.course VALUES (22, 'Automatizarea proceselor de business', 1, 3, 'rafaelparton', 5, 194, 2);
+INSERT INTO public.course VALUES (23, 'Calcul numeric', 1, 3, 'terrawelch', 6, 156, 1);
+INSERT INTO public.course VALUES (24, 'Verificarea si validarea sistemelor soft', 1, 3, 'miguelroberts', 6, 186, 1);
+INSERT INTO public.course VALUES (25, 'Programarea orientata pe aspecte', 1, 3, 'jackthomas', 6, 151, 2);
+INSERT INTO public.course VALUES (26, 'Sabloane de proiectare', 1, 3, 'lilliansmith', 6, 166, 2);
+INSERT INTO public.course VALUES (27, 'Istoria informaticii', 1, 3, 'frankboggan', 6, 176, 2);
+INSERT INTO public.course VALUES (28, 'Invatare interactiva', 1, 3, 'davidwixon', 6, 160, 2);
+INSERT INTO public.course VALUES (29, 'Algebra 1', 2, 1, 'nancygood', 1, 166, 1);
+INSERT INTO public.course VALUES (30, 'Algoritmi si programare', 2, 1, 'marieprice', 1, 182, 1);
+INSERT INTO public.course VALUES (31, 'Analiza 1', 2, 1, 'michaelgarver', 1, 212, 1);
+INSERT INTO public.course VALUES (32, 'Matematica de baza', 2, 1, 'dianestoner', 1, 205, 3);
+INSERT INTO public.course VALUES (33, 'Algebra 2', 2, 1, 'jamesholman', 2, 207, 1);
+INSERT INTO public.course VALUES (34, 'Analiza 2', 2, 1, 'sonjasievers', 2, 194, 1);
+INSERT INTO public.course VALUES (35, 'OOP', 2, 1, 'anthonystemple', 2, 212, 1);
+INSERT INTO public.course VALUES (36, 'Metode avansate de rezolvare a problemelor de matematica şi informatica', 2, 1, 'aliceward', 2, 170, 3);
+INSERT INTO public.course VALUES (37, 'Topologie', 2, 2, 'dianestoner', 3, 154, 1);
+INSERT INTO public.course VALUES (38, 'Geometrie 3', 2, 2, 'maryschober', 3, 176, 1);
+INSERT INTO public.course VALUES (39, 'Ecuatii diferentiale', 2, 2, 'wendygibbs', 3, 211, 1);
+INSERT INTO public.course VALUES (40, 'Analiza convexa', 2, 2, 'frankboggan', 3, 200, 2);
+INSERT INTO public.course VALUES (41, 'Teoria probabilitatilor', 2, 2, 'silviapuente', 4, 159, 1);
+INSERT INTO public.course VALUES (42, 'Analiza numerica', 2, 2, 'kristophernasuti', 4, 167, 1);
+INSERT INTO public.course VALUES (43, 'Modelare matematica', 2, 2, 'rickeymercado', 4, 188, 2);
+INSERT INTO public.course VALUES (44, 'Capitole speciale de ecuatii diferentiale', 2, 2, 'elmerhayes', 4, 204, 2);
+INSERT INTO public.course VALUES (45, 'Astronomie', 2, 3, 'jackthomas', 5, 166, 1);
+INSERT INTO public.course VALUES (46, 'Analiza functionala', 2, 3, 'davidwixon', 5, 163, 1);
+INSERT INTO public.course VALUES (47, 'Matematica operatiunilor financiare', 2, 3, 'wendygibbs', 5, 180, 2);
+INSERT INTO public.course VALUES (48, 'Metode numerice cu aplicatii', 2, 3, 'marieprice', 5, 185, 2);
+INSERT INTO public.course VALUES (49, 'Metode numerice in mecanica', 2, 3, 'reginacastle', 5, 165, 2);
+INSERT INTO public.course VALUES (50, 'Complemente de algebra', 2, 3, 'kristophernasuti', 5, 157, 2);
+INSERT INTO public.course VALUES (51, 'Teoria numerelor', 2, 3, 'leonorton', 6, 214, 1);
+INSERT INTO public.course VALUES (52, 'Complemente de mecanica si astronomie', 2, 3, 'elmerhayes', 6, 167, 2);
+INSERT INTO public.course VALUES (53, 'Complemente de geometrie', 2, 3, 'davidwixon', 6, 172, 2);
+INSERT INTO public.course VALUES (54, 'Algebra 1', 3, 1, 'williambrandon', 1, 176, 1);
+INSERT INTO public.course VALUES (55, 'Algoritmi si programare', 3, 1, 'williambrandon', 1, 163, 1);
+INSERT INTO public.course VALUES (56, 'Fundamentele programarii', 3, 1, 'williambrandon', 1, 209, 1);
+INSERT INTO public.course VALUES (57, 'Matematica de baza', 3, 1, 'nancygood', 1, 205, 3);
+INSERT INTO public.course VALUES (58, 'Algebra 2', 3, 1, 'kathleenjohnson', 2, 202, 1);
+INSERT INTO public.course VALUES (59, 'Structuri de date si algoritmi', 3, 1, 'elmerhayes', 2, 184, 1);
+INSERT INTO public.course VALUES (60, 'OOP', 3, 1, 'johnrodriguez', 2, 154, 1);
+INSERT INTO public.course VALUES (61, 'Metode avansate de rezolvare a problemelor de matematica şi informatica', 3, 1, 'daviddailey', 2, 215, 3);
+INSERT INTO public.course VALUES (62, 'Topologie', 3, 2, 'jackthomas', 3, 211, 1);
+INSERT INTO public.course VALUES (63, 'Baze de date', 3, 2, 'wendygibbs', 3, 151, 1);
+INSERT INTO public.course VALUES (64, 'Ecuatii diferentiale', 3, 2, 'jeremydiller', 3, 188, 1);
+INSERT INTO public.course VALUES (65, 'Medii de proiectare si programare', 3, 2, 'melvinkautz', 4, 203, 1);
+INSERT INTO public.course VALUES (66, 'Analiza numerica', 3, 2, 'jantotten', 4, 212, 1);
+INSERT INTO public.course VALUES (67, 'Modelare matematica', 3, 2, 'donnaduvall', 4, 157, 2);
+INSERT INTO public.course VALUES (68, 'Programare paralela si distribuita', 3, 3, 'ruthballard', 5, 210, 1);
+INSERT INTO public.course VALUES (69, 'Analiza functionala', 3, 3, 'jantotten', 5, 183, 1);
+INSERT INTO public.course VALUES (70, 'Matematica operatiunilor financiare', 3, 3, 'chrisjean', 5, 212, 2);
+INSERT INTO public.course VALUES (71, 'Protocoale specializate in retele de calculatoare', 3, 3, 'davidwixon', 5, 163, 2);
+INSERT INTO public.course VALUES (72, 'Metode numerice in mecanica', 3, 3, 'ashleyortega', 5, 197, 2);
+INSERT INTO public.course VALUES (73, 'Complemente de algebra', 3, 3, 'christiankleinpeter', 5, 201, 2);
+INSERT INTO public.course VALUES (74, 'Verificarea si validarea sistemelor soft', 3, 3, 'adelinafultz', 6, 206, 1);
+INSERT INTO public.course VALUES (75, 'Complemente de mecanica si astronomie', 3, 3, 'rhondalyles', 6, 168, 2);
+INSERT INTO public.course VALUES (76, 'Invatare interactiva', 3, 3, 'davidgouldman', 6, 151, 2);
+INSERT INTO public.course VALUES (77, 'Algebra', 4, 1, 'michaelgarver', 1, 202, 1);
+INSERT INTO public.course VALUES (78, 'Analiza', 4, 1, 'generaver', 1, 192, 1);
+INSERT INTO public.course VALUES (79, 'Chimie generala', 4, 1, 'rickeymercado', 1, 201, 3);
+INSERT INTO public.course VALUES (80, 'Termodinamica', 4, 1, 'anthonystemple', 2, 203, 1);
+INSERT INTO public.course VALUES (81, 'Ecuatii diferentiale', 4, 1, 'rhondalyles', 2, 195, 1);
+INSERT INTO public.course VALUES (82, 'Informatica aplicaa in fizica', 4, 1, 'reginacastle', 2, 152, 3);
+INSERT INTO public.course VALUES (83, 'Optica', 4, 2, 'johnavila', 3, 209, 1);
+INSERT INTO public.course VALUES (84, 'Electronica', 4, 2, 'jarvisdifranco', 3, 169, 1);
+INSERT INTO public.course VALUES (85, 'Mecanica cuantica', 4, 2, 'rhondalyles', 3, 171, 3);
+INSERT INTO public.course VALUES (86, 'Fizica nucleara', 4, 2, 'silviapuente', 4, 153, 1);
+INSERT INTO public.course VALUES (87, 'Fizica atomului', 4, 2, 'rhondalyles', 4, 161, 1);
+INSERT INTO public.course VALUES (88, 'Optia 2', 4, 2, 'earnestinesuarez', 4, 152, 3);
+INSERT INTO public.course VALUES (89, 'Fizica moleculei', 4, 3, 'teresabutts', 5, 160, 1);
+INSERT INTO public.course VALUES (90, 'Fizica solidului', 4, 3, 'matthewhippen', 5, 151, 1);
+INSERT INTO public.course VALUES (91, 'Spectroscopie si laseri', 4, 3, 'majorstokes', 5, 182, 2);
+INSERT INTO public.course VALUES (92, 'Fizica semiconductorului', 4, 3, 'lindaparish', 6, 191, 1);
+INSERT INTO public.course VALUES (93, 'Curs optional 1', 4, 3, 'anthonystemple', 6, 155, 2);
+INSERT INTO public.course VALUES (94, 'Curs optional 2', 4, 3, 'lindaparish', 6, 192, 2);
+INSERT INTO public.course VALUES (95, 'Algebra', 5, 1, 'charlespress', 1, 154, 1);
+INSERT INTO public.course VALUES (96, 'Analiza', 5, 1, 'geraldshamapande', 1, 189, 1);
+INSERT INTO public.course VALUES (97, 'Fundamentele Programarii', 5, 1, 'christiankleinpeter', 1, 202, 3);
+INSERT INTO public.course VALUES (98, 'Termodinamica', 5, 1, 'caseyblue', 2, 151, 1);
+INSERT INTO public.course VALUES (99, 'Ecuatii diferentiale', 5, 1, 'davidwixon', 2, 204, 1);
+INSERT INTO public.course VALUES (100, 'OOP', 5, 1, 'rhondalyles', 2, 188, 3);
+INSERT INTO public.course VALUES (101, 'Optica', 5, 2, 'nataliemessenger', 3, 153, 1);
+INSERT INTO public.course VALUES (102, 'Electronica', 5, 2, 'ashleyortega', 3, 157, 1);
+INSERT INTO public.course VALUES (103, 'Mecanica cuantica', 5, 2, 'teresabutts', 3, 168, 3);
+INSERT INTO public.course VALUES (104, 'Fizica nucleara', 5, 2, 'johnrodriguez', 4, 153, 1);
+INSERT INTO public.course VALUES (105, 'Metode avansate de programare', 5, 2, 'maryschober', 4, 210, 1);
+INSERT INTO public.course VALUES (106, 'Optia 2', 5, 2, 'nataliemessenger', 4, 154, 3);
+INSERT INTO public.course VALUES (107, 'Fizica moleculei', 5, 3, 'jenniferlamb', 5, 151, 1);
+INSERT INTO public.course VALUES (108, 'Sisteme de operare', 5, 3, 'jenniferlamb', 5, 187, 1);
+INSERT INTO public.course VALUES (109, 'Spectroscopie si laseri', 5, 3, 'louishaskins', 5, 188, 2);
+INSERT INTO public.course VALUES (110, 'Fizica semiconductorului', 5, 3, 'herbertdenault', 6, 193, 1);
+INSERT INTO public.course VALUES (111, 'Curs optional 1', 5, 3, 'johnrodriguez', 6, 201, 2);
+INSERT INTO public.course VALUES (112, 'Curs optional 2', 5, 3, 'daviddailey', 6, 199, 2);
+INSERT INTO public.course VALUES (113, 'Algebra', 6, 1, 'ashleyortega', 1, 198, 1);
+INSERT INTO public.course VALUES (114, 'Analiza', 6, 1, 'helensees', 1, 161, 1);
+INSERT INTO public.course VALUES (115, 'Chimie generala', 6, 1, 'ashleyortega', 1, 156, 1);
+INSERT INTO public.course VALUES (116, 'Termodinamica', 6, 1, 'wendygibbs', 2, 202, 1);
+INSERT INTO public.course VALUES (117, 'Ecuatii diferentiale', 6, 1, 'jarvisdifranco', 2, 171, 1);
+INSERT INTO public.course VALUES (118, 'Informatica aplicaa in fizica', 6, 1, 'jasonackland', 2, 194, 3);
+INSERT INTO public.course VALUES (119, 'Biofizica', 6, 2, 'rodbain', 3, 183, 1);
+INSERT INTO public.course VALUES (120, 'Biochimie', 6, 2, 'jasonackland', 3, 194, 1);
+INSERT INTO public.course VALUES (121, 'Optica', 6, 2, 'donnaduvall', 3, 207, 3);
+INSERT INTO public.course VALUES (122, 'Fizica nucleara', 6, 2, 'jennyneidig', 4, 214, 1);
+INSERT INTO public.course VALUES (123, 'Fizica atomului', 6, 2, 'charlespress', 4, 211, 1);
+INSERT INTO public.course VALUES (124, 'Optia 2', 6, 2, 'eliahorn', 4, 181, 3);
+INSERT INTO public.course VALUES (125, 'Fizica moleculei', 6, 3, 'jantotten', 5, 193, 1);
+INSERT INTO public.course VALUES (126, 'Fizica solidului', 6, 3, 'markwillie', 5, 173, 1);
+INSERT INTO public.course VALUES (127, 'Medicina nucleara', 6, 3, 'jackthomas', 5, 161, 2);
+INSERT INTO public.course VALUES (128, 'Radiologie', 6, 3, 'davidmartin', 6, 172, 1);
+INSERT INTO public.course VALUES (129, 'Curs optional 1', 6, 3, 'robertford', 6, 153, 2);
+INSERT INTO public.course VALUES (130, 'Curs optional 2', 6, 3, 'davidmartin', 6, 194, 2);
+INSERT INTO public.course VALUES (131, 'Introducere in istoria veche universala', 7, 1, 'jennyneidig', 1, 189, 1);
+INSERT INTO public.course VALUES (132, 'Introducere in istoria veche a României', 7, 1, 'rodbain', 1, 160, 1);
+INSERT INTO public.course VALUES (133, 'stiintele auxiliare ale istoriei', 7, 1, 'charlesmcbride', 1, 155, 3);
+INSERT INTO public.course VALUES (134, 'Introducere in istoria medie universala', 7, 1, 'majorstokes', 2, 179, 1);
+INSERT INTO public.course VALUES (135, 'Istoria Bizantului', 7, 1, 'majorstokes', 2, 156, 1);
+INSERT INTO public.course VALUES (136, 'Introducere in metodologia cercetarii stiintifice', 7, 1, 'jamesholman', 2, 199, 3);
+INSERT INTO public.course VALUES (137, 'Introducere in istoria moderna universala', 7, 2, 'majorstokes', 3, 180, 1);
+INSERT INTO public.course VALUES (138, 'Relaţii internaţionale in secolele XVIII-XIX', 7, 2, 'jennyneidig', 3, 164, 1);
+INSERT INTO public.course VALUES (139, 'Istoria mentalitaţilor colective', 7, 2, 'eliahorn', 3, 201, 3);
+INSERT INTO public.course VALUES (140, 'Introducere in istoria contemporana universala', 7, 2, 'geraldshamapande', 4, 168, 1);
+INSERT INTO public.course VALUES (141, 'Introducere in istoria contemporana a României', 7, 2, 'terrawelch', 4, 166, 1);
+INSERT INTO public.course VALUES (142, 'Istoria integrarii europene', 7, 2, 'generaver', 4, 169, 3);
+INSERT INTO public.course VALUES (143, 'Istoria si teoria artei', 7, 3, 'reginacastle', 5, 158, 1);
+INSERT INTO public.course VALUES (144, 'Paleografii 1', 7, 3, 'williambrandon', 5, 172, 1);
+INSERT INTO public.course VALUES (145, 'Curs special 1', 7, 3, 'susiehiggins', 5, 194, 2);
+INSERT INTO public.course VALUES (146, 'Introducere in teoria istoriei', 7, 3, 'daviddailey', 6, 169, 1);
+INSERT INTO public.course VALUES (147, 'Paleografii 2', 7, 3, 'melvinkautz', 6, 198, 1);
+INSERT INTO public.course VALUES (148, 'Curs optional 2: Limba izvoarelor II - latina', 7, 3, 'lindaparish', 6, 167, 2);
+INSERT INTO public.course VALUES (149, 'Geografie generala', 8, 1, 'reginacastle', 1, 209, 1);
+INSERT INTO public.course VALUES (150, 'Geologie generala', 8, 1, 'herbertdenault', 1, 197, 1);
+INSERT INTO public.course VALUES (151, 'Fundamente de antreprenoriat', 8, 1, 'johnavila', 1, 156, 1);
+INSERT INTO public.course VALUES (152, 'Geomorfologie', 8, 1, 'leonorton', 2, 214, 1);
+INSERT INTO public.course VALUES (153, 'Geografie regionala', 8, 1, 'jennyneidig', 2, 173, 1);
+INSERT INTO public.course VALUES (154, 'Fundamente de antreprenoriat 2', 8, 1, 'jarvisdifranco', 2, 183, 3);
+INSERT INTO public.course VALUES (155, 'Geografia asezarilor', 8, 2, 'wendygibbs', 3, 189, 1);
+INSERT INTO public.course VALUES (156, 'Geografia fizica a romaniei', 8, 2, 'louishaskins', 3, 181, 1);
+INSERT INTO public.course VALUES (157, 'Toponomie geografica', 8, 2, 'charlesmcbride', 3, 157, 2);
+INSERT INTO public.course VALUES (158, 'Geografia umana a romaniei', 8, 2, 'jantotten', 4, 189, 1);
+INSERT INTO public.course VALUES (159, 'Pedogeografie', 8, 2, 'leonorton', 4, 157, 1);
+INSERT INTO public.course VALUES (160, 'Geografia uniunii europene', 8, 2, 'melvinkautz', 4, 185, 2);
+INSERT INTO public.course VALUES (161, 'Geografia peisajului', 8, 3, 'lindaparish', 5, 162, 1);
+INSERT INTO public.course VALUES (162, 'Organizarea spatiului geografic', 8, 3, 'wendygibbs', 5, 207, 1);
+INSERT INTO public.course VALUES (163, 'Geografie sociala', 8, 3, 'kathleenjohnson', 5, 159, 2);
+INSERT INTO public.course VALUES (164, 'Geografia turismului', 8, 3, 'chrisjean', 6, 204, 1);
+INSERT INTO public.course VALUES (165, 'Planificare teritoriala', 8, 3, 'kristophernasuti', 6, 166, 2);
+INSERT INTO public.course VALUES (166, 'Oceanografie', 8, 3, 'charlesmcbride', 6, 169, 2);
+INSERT INTO public.course VALUES (167, 'Geografie generala', 9, 1, 'reginacastle', 1, 157, 1);
+INSERT INTO public.course VALUES (168, 'Geografie generala a turismului', 9, 1, 'charlesmcbride', 1, 215, 1);
+INSERT INTO public.course VALUES (169, 'Fundamente de antreprenoriat', 9, 1, 'marieprice', 1, 203, 1);
+INSERT INTO public.course VALUES (170, 'Geografia regionala a romaniei', 9, 1, 'kristophernasuti', 2, 161, 1);
+INSERT INTO public.course VALUES (171, 'Arhitectura in turism', 9, 1, 'teresabutts', 2, 176, 1);
+INSERT INTO public.course VALUES (172, 'Fundamente de antreprenoriat 2', 9, 1, 'reginacastle', 2, 200, 3);
+INSERT INTO public.course VALUES (173, 'Geografia turismului in Romania', 9, 2, 'jarvisdifranco', 3, 190, 1);
+INSERT INTO public.course VALUES (174, 'Organizarea intreprinderilor si serviciilor in turism', 9, 2, 'caseyblue', 3, 158, 1);
+INSERT INTO public.course VALUES (175, 'Cultura si civilizatie britanica', 9, 2, 'davidgouldman', 3, 185, 3);
+INSERT INTO public.course VALUES (176, 'Management turistic', 9, 2, 'jantotten', 4, 186, 1);
+INSERT INTO public.course VALUES (177, 'Comunicare si imagine in turism', 9, 2, 'charlespress', 4, 173, 1);
+INSERT INTO public.course VALUES (178, 'Istoria turismului', 9, 2, 'leonorton', 4, 178, 2);
+INSERT INTO public.course VALUES (179, 'Prospectare si strategii de dezvoltare turistica', 9, 3, 'eliahorn', 5, 194, 1);
+INSERT INTO public.course VALUES (180, 'Ecoturism şi dezvoltare durabila', 9, 3, 'ashleyortega', 5, 187, 1);
+INSERT INTO public.course VALUES (181, 'Turism rural', 9, 3, 'sonjasievers', 5, 159, 2);
+INSERT INTO public.course VALUES (182, 'Geografie economica', 9, 3, 'rafaelparton', 6, 215, 1);
+INSERT INTO public.course VALUES (183, 'Economia turismului şi intreprinderii de turism', 9, 3, 'dianestoner', 6, 154, 2);
+INSERT INTO public.course VALUES (184, 'Geografie sociala', 9, 3, 'jeremydiller', 6, 201, 2);
+
+
+--
+-- TOC entry 3401 (class 0 OID 16883)
+-- Dependencies: 220
+-- Data for Name: course_priority; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+INSERT INTO public.course_priority VALUES (1, 'mandatory');
+INSERT INTO public.course_priority VALUES (2, 'optional');
+INSERT INTO public.course_priority VALUES (3, 'facultative');
+
+
+--
+-- TOC entry 3391 (class 0 OID 16728)
+-- Dependencies: 210
+-- Data for Name: faculty; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+INSERT INTO public.faculty VALUES (1, 'Mathematics and Informatics-Informatica', 3, 'generaver');
+INSERT INTO public.faculty VALUES (2, 'Mathematics and Informatics-Matematica', 3, 'matthewhippen');
+INSERT INTO public.faculty VALUES (3, 'Mathematics and Informatics-Matematica Informatica', 3, 'terrawelch');
+INSERT INTO public.faculty VALUES (4, 'Physics-Fizica', 3, 'charlesmcbride');
+INSERT INTO public.faculty VALUES (5, 'Physics-Fizica Informatica', 3, 'kristophernasuti');
+INSERT INTO public.faculty VALUES (6, 'Physics-Fizica medicala', 3, 'chrisjean');
+INSERT INTO public.faculty VALUES (7, 'History and Philosophy-Istorie', 3, 'elmerhayes');
+INSERT INTO public.faculty VALUES (8, 'Geography-Geografie', 3, 'michaelgarver');
+INSERT INTO public.faculty VALUES (9, 'Geography-Geografia Turismului', 3, 'ruthballard');
+
+
+--
+-- TOC entry 3392 (class 0 OID 16735)
+-- Dependencies: 211
+-- Data for Name: grade; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+INSERT INTO public.grade VALUES (2, 'phillipworkman', 3);
+INSERT INTO public.grade VALUES (1, 'evatrujillo', 3);
+INSERT INTO public.grade VALUES (2, 'garydavidson', 1);
+INSERT INTO public.grade VALUES (4, 'mattievisher', 2);
+INSERT INTO public.grade VALUES (2, 'sontemplin', 1);
+INSERT INTO public.grade VALUES (7, 'russellziegler', 2);
+INSERT INTO public.grade VALUES (1, 'robertakille', 2);
+INSERT INTO public.grade VALUES (10, 'michaelelza', 2);
+INSERT INTO public.grade VALUES (8, 'jeffzielinski', 1);
+INSERT INTO public.grade VALUES (10, 'williamcarroll', 1);
+
+
+--
+-- TOC entry 3393 (class 0 OID 16742)
+-- Dependencies: 212
+-- Data for Name: group; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+INSERT INTO public."group" VALUES (1, 1, 1);
+INSERT INTO public."group" VALUES (2, 1, 1);
+INSERT INTO public."group" VALUES (3, 1, 1);
+INSERT INTO public."group" VALUES (4, 1, 1);
+INSERT INTO public."group" VALUES (5, 1, 1);
+INSERT INTO public."group" VALUES (6, 1, 2);
+INSERT INTO public."group" VALUES (7, 1, 2);
+INSERT INTO public."group" VALUES (8, 1, 2);
+INSERT INTO public."group" VALUES (9, 1, 2);
+INSERT INTO public."group" VALUES (10, 1, 2);
+INSERT INTO public."group" VALUES (11, 1, 3);
+INSERT INTO public."group" VALUES (12, 1, 3);
+INSERT INTO public."group" VALUES (13, 1, 3);
+INSERT INTO public."group" VALUES (14, 1, 3);
+INSERT INTO public."group" VALUES (15, 1, 3);
+INSERT INTO public."group" VALUES (16, 2, 1);
+INSERT INTO public."group" VALUES (17, 2, 1);
+INSERT INTO public."group" VALUES (18, 2, 1);
+INSERT INTO public."group" VALUES (19, 2, 1);
+INSERT INTO public."group" VALUES (20, 2, 1);
+INSERT INTO public."group" VALUES (21, 2, 2);
+INSERT INTO public."group" VALUES (22, 2, 2);
+INSERT INTO public."group" VALUES (23, 2, 2);
+INSERT INTO public."group" VALUES (24, 2, 2);
+INSERT INTO public."group" VALUES (25, 2, 2);
+INSERT INTO public."group" VALUES (26, 2, 3);
+INSERT INTO public."group" VALUES (27, 2, 3);
+INSERT INTO public."group" VALUES (28, 2, 3);
+INSERT INTO public."group" VALUES (29, 2, 3);
+INSERT INTO public."group" VALUES (30, 2, 3);
+INSERT INTO public."group" VALUES (31, 3, 1);
+INSERT INTO public."group" VALUES (32, 3, 1);
+INSERT INTO public."group" VALUES (33, 3, 1);
+INSERT INTO public."group" VALUES (34, 3, 1);
+INSERT INTO public."group" VALUES (35, 3, 1);
+INSERT INTO public."group" VALUES (36, 3, 2);
+INSERT INTO public."group" VALUES (37, 3, 2);
+INSERT INTO public."group" VALUES (38, 3, 2);
+INSERT INTO public."group" VALUES (39, 3, 2);
+INSERT INTO public."group" VALUES (40, 3, 2);
+INSERT INTO public."group" VALUES (41, 3, 3);
+INSERT INTO public."group" VALUES (42, 3, 3);
+INSERT INTO public."group" VALUES (43, 3, 3);
+INSERT INTO public."group" VALUES (44, 3, 3);
+INSERT INTO public."group" VALUES (45, 3, 3);
+INSERT INTO public."group" VALUES (46, 4, 1);
+INSERT INTO public."group" VALUES (47, 4, 1);
+INSERT INTO public."group" VALUES (48, 4, 1);
+INSERT INTO public."group" VALUES (49, 4, 1);
+INSERT INTO public."group" VALUES (50, 4, 1);
+INSERT INTO public."group" VALUES (51, 4, 2);
+INSERT INTO public."group" VALUES (52, 4, 2);
+INSERT INTO public."group" VALUES (53, 4, 2);
+INSERT INTO public."group" VALUES (54, 4, 2);
+INSERT INTO public."group" VALUES (55, 4, 2);
+INSERT INTO public."group" VALUES (56, 4, 3);
+INSERT INTO public."group" VALUES (57, 4, 3);
+INSERT INTO public."group" VALUES (58, 4, 3);
+INSERT INTO public."group" VALUES (59, 4, 3);
+INSERT INTO public."group" VALUES (60, 4, 3);
+INSERT INTO public."group" VALUES (61, 5, 1);
+INSERT INTO public."group" VALUES (62, 5, 1);
+INSERT INTO public."group" VALUES (63, 5, 1);
+INSERT INTO public."group" VALUES (64, 5, 1);
+INSERT INTO public."group" VALUES (65, 5, 1);
+INSERT INTO public."group" VALUES (66, 5, 2);
+INSERT INTO public."group" VALUES (67, 5, 2);
+INSERT INTO public."group" VALUES (68, 5, 2);
+INSERT INTO public."group" VALUES (69, 5, 2);
+INSERT INTO public."group" VALUES (70, 5, 2);
+INSERT INTO public."group" VALUES (71, 5, 3);
+INSERT INTO public."group" VALUES (72, 5, 3);
+INSERT INTO public."group" VALUES (73, 5, 3);
+INSERT INTO public."group" VALUES (74, 5, 3);
+INSERT INTO public."group" VALUES (75, 5, 3);
+INSERT INTO public."group" VALUES (76, 6, 1);
+INSERT INTO public."group" VALUES (77, 6, 1);
+INSERT INTO public."group" VALUES (78, 6, 1);
+INSERT INTO public."group" VALUES (79, 6, 1);
+INSERT INTO public."group" VALUES (80, 6, 1);
+INSERT INTO public."group" VALUES (81, 6, 2);
+INSERT INTO public."group" VALUES (82, 6, 2);
+INSERT INTO public."group" VALUES (83, 6, 2);
+INSERT INTO public."group" VALUES (84, 6, 2);
+INSERT INTO public."group" VALUES (85, 6, 2);
+INSERT INTO public."group" VALUES (86, 6, 3);
+INSERT INTO public."group" VALUES (87, 6, 3);
+INSERT INTO public."group" VALUES (88, 6, 3);
+INSERT INTO public."group" VALUES (89, 6, 3);
+INSERT INTO public."group" VALUES (90, 6, 3);
+INSERT INTO public."group" VALUES (91, 7, 1);
+INSERT INTO public."group" VALUES (92, 7, 1);
+INSERT INTO public."group" VALUES (93, 7, 1);
+INSERT INTO public."group" VALUES (94, 7, 1);
+INSERT INTO public."group" VALUES (95, 7, 1);
+INSERT INTO public."group" VALUES (96, 7, 2);
+INSERT INTO public."group" VALUES (97, 7, 2);
+INSERT INTO public."group" VALUES (98, 7, 2);
+INSERT INTO public."group" VALUES (99, 7, 2);
+INSERT INTO public."group" VALUES (100, 7, 2);
+INSERT INTO public."group" VALUES (101, 7, 3);
+INSERT INTO public."group" VALUES (102, 7, 3);
+INSERT INTO public."group" VALUES (103, 7, 3);
+INSERT INTO public."group" VALUES (104, 7, 3);
+INSERT INTO public."group" VALUES (105, 7, 3);
+INSERT INTO public."group" VALUES (106, 8, 1);
+INSERT INTO public."group" VALUES (107, 8, 1);
+INSERT INTO public."group" VALUES (108, 8, 1);
+INSERT INTO public."group" VALUES (109, 8, 1);
+INSERT INTO public."group" VALUES (110, 8, 1);
+INSERT INTO public."group" VALUES (111, 8, 2);
+INSERT INTO public."group" VALUES (112, 8, 2);
+INSERT INTO public."group" VALUES (113, 8, 2);
+INSERT INTO public."group" VALUES (114, 8, 2);
+INSERT INTO public."group" VALUES (115, 8, 2);
+INSERT INTO public."group" VALUES (116, 8, 3);
+INSERT INTO public."group" VALUES (117, 8, 3);
+INSERT INTO public."group" VALUES (118, 8, 3);
+INSERT INTO public."group" VALUES (119, 8, 3);
+INSERT INTO public."group" VALUES (120, 8, 3);
+INSERT INTO public."group" VALUES (121, 9, 1);
+INSERT INTO public."group" VALUES (122, 9, 1);
+INSERT INTO public."group" VALUES (123, 9, 1);
+INSERT INTO public."group" VALUES (124, 9, 1);
+INSERT INTO public."group" VALUES (125, 9, 1);
+INSERT INTO public."group" VALUES (126, 9, 2);
+INSERT INTO public."group" VALUES (127, 9, 2);
+INSERT INTO public."group" VALUES (128, 9, 2);
+INSERT INTO public."group" VALUES (129, 9, 2);
+INSERT INTO public."group" VALUES (130, 9, 2);
+INSERT INTO public."group" VALUES (131, 9, 3);
+INSERT INTO public."group" VALUES (132, 9, 3);
+INSERT INTO public."group" VALUES (133, 9, 3);
+INSERT INTO public."group" VALUES (134, 9, 3);
+INSERT INTO public."group" VALUES (135, 9, 3);
+
+
+--
+-- TOC entry 3394 (class 0 OID 16747)
+-- Dependencies: 213
+-- Data for Name: optional_course; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+INSERT INTO public.optional_course VALUES (19, 'maryschober');
+INSERT INTO public.optional_course VALUES (20, 'charlespress');
+INSERT INTO public.optional_course VALUES (21, 'christiankleinpeter');
+INSERT INTO public.optional_course VALUES (22, 'rafaelparton');
+INSERT INTO public.optional_course VALUES (25, 'jackthomas');
+INSERT INTO public.optional_course VALUES (26, 'lilliansmith');
+INSERT INTO public.optional_course VALUES (27, 'frankboggan');
+INSERT INTO public.optional_course VALUES (28, 'davidwixon');
+INSERT INTO public.optional_course VALUES (40, 'frankboggan');
+INSERT INTO public.optional_course VALUES (43, 'rickeymercado');
+INSERT INTO public.optional_course VALUES (44, 'elmerhayes');
+INSERT INTO public.optional_course VALUES (47, 'wendygibbs');
+INSERT INTO public.optional_course VALUES (48, 'marieprice');
+INSERT INTO public.optional_course VALUES (49, 'reginacastle');
+INSERT INTO public.optional_course VALUES (50, 'kristophernasuti');
+INSERT INTO public.optional_course VALUES (52, 'elmerhayes');
+INSERT INTO public.optional_course VALUES (53, 'davidwixon');
+INSERT INTO public.optional_course VALUES (67, 'donnaduvall');
+INSERT INTO public.optional_course VALUES (70, 'chrisjean');
+INSERT INTO public.optional_course VALUES (71, 'davidwixon');
+INSERT INTO public.optional_course VALUES (72, 'ashleyortega');
+INSERT INTO public.optional_course VALUES (73, 'christiankleinpeter');
+INSERT INTO public.optional_course VALUES (75, 'rhondalyles');
+INSERT INTO public.optional_course VALUES (76, 'davidgouldman');
+INSERT INTO public.optional_course VALUES (91, 'majorstokes');
+INSERT INTO public.optional_course VALUES (93, 'anthonystemple');
+INSERT INTO public.optional_course VALUES (94, 'lindaparish');
+INSERT INTO public.optional_course VALUES (109, 'louishaskins');
+INSERT INTO public.optional_course VALUES (111, 'johnrodriguez');
+INSERT INTO public.optional_course VALUES (112, 'daviddailey');
+INSERT INTO public.optional_course VALUES (127, 'jackthomas');
+INSERT INTO public.optional_course VALUES (129, 'robertford');
+INSERT INTO public.optional_course VALUES (130, 'davidmartin');
+INSERT INTO public.optional_course VALUES (145, 'susiehiggins');
+INSERT INTO public.optional_course VALUES (148, 'lindaparish');
+INSERT INTO public.optional_course VALUES (157, 'charlesmcbride');
+INSERT INTO public.optional_course VALUES (160, 'melvinkautz');
+INSERT INTO public.optional_course VALUES (163, 'kathleenjohnson');
+INSERT INTO public.optional_course VALUES (165, 'kristophernasuti');
+INSERT INTO public.optional_course VALUES (166, 'charlesmcbride');
+INSERT INTO public.optional_course VALUES (178, 'leonorton');
+INSERT INTO public.optional_course VALUES (181, 'sonjasievers');
+INSERT INTO public.optional_course VALUES (183, 'dianestoner');
+INSERT INTO public.optional_course VALUES (184, 'jeremydiller');
+
+
+--
+-- TOC entry 3395 (class 0 OID 16754)
+-- Dependencies: 214
+-- Data for Name: optional_course_enrollment; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+INSERT INTO public.optional_course_enrollment VALUES ('charlesdexter', 94);
+INSERT INTO public.optional_course_enrollment VALUES ('charlesdexter', 165);
+INSERT INTO public.optional_course_enrollment VALUES ('charlesdexter', 47);
+INSERT INTO public.optional_course_enrollment VALUES ('charlesdexter', 148);
+INSERT INTO public.optional_course_enrollment VALUES ('charlesdexter', 184);
+INSERT INTO public.optional_course_enrollment VALUES ('minniehamlin', 43);
+INSERT INTO public.optional_course_enrollment VALUES ('minniehamlin', 111);
+INSERT INTO public.optional_course_enrollment VALUES ('minniehamlin', 75);
+INSERT INTO public.optional_course_enrollment VALUES ('sophiavaldes', 157);
+INSERT INTO public.optional_course_enrollment VALUES ('sophiavaldes', 52);
+INSERT INTO public.optional_course_enrollment VALUES ('sophiavaldes', 165);
+INSERT INTO public.optional_course_enrollment VALUES ('sophiavaldes', 130);
+INSERT INTO public.optional_course_enrollment VALUES ('youngschweitzer', 129);
+INSERT INTO public.optional_course_enrollment VALUES ('youngschweitzer', 21);
+INSERT INTO public.optional_course_enrollment VALUES ('youngschweitzer', 75);
+INSERT INTO public.optional_course_enrollment VALUES ('youngschweitzer', 27);
+INSERT INTO public.optional_course_enrollment VALUES ('youngschweitzer', 22);
+INSERT INTO public.optional_course_enrollment VALUES ('patsycaudillo', 145);
+INSERT INTO public.optional_course_enrollment VALUES ('patsycaudillo', 43);
+INSERT INTO public.optional_course_enrollment VALUES ('susanvargas', 183);
+INSERT INTO public.optional_course_enrollment VALUES ('susanvargas', 127);
+INSERT INTO public.optional_course_enrollment VALUES ('susanvargas', 112);
+INSERT INTO public.optional_course_enrollment VALUES ('michaelelza', 48);
+INSERT INTO public.optional_course_enrollment VALUES ('michaelelza', 129);
+INSERT INTO public.optional_course_enrollment VALUES ('michaelelza', 26);
+INSERT INTO public.optional_course_enrollment VALUES ('tonylee', 76);
+INSERT INTO public.optional_course_enrollment VALUES ('tonylee', 71);
+INSERT INTO public.optional_course_enrollment VALUES ('dawnwilliams', 67);
+INSERT INTO public.optional_course_enrollment VALUES ('russellziegler', 67);
+INSERT INTO public.optional_course_enrollment VALUES ('russellziegler', 181);
+INSERT INTO public.optional_course_enrollment VALUES ('russellziegler', 48);
+INSERT INTO public.optional_course_enrollment VALUES ('russellziegler', 28);
+INSERT INTO public.optional_course_enrollment VALUES ('russellziegler', 22);
+INSERT INTO public.optional_course_enrollment VALUES ('joseruzich', 111);
+INSERT INTO public.optional_course_enrollment VALUES ('joseruzich', 129);
+INSERT INTO public.optional_course_enrollment VALUES ('joseruzich', 93);
+INSERT INTO public.optional_course_enrollment VALUES ('tracybell', 28);
+INSERT INTO public.optional_course_enrollment VALUES ('annafisher', 178);
+INSERT INTO public.optional_course_enrollment VALUES ('annafisher', 181);
+INSERT INTO public.optional_course_enrollment VALUES ('annafisher', 50);
+INSERT INTO public.optional_course_enrollment VALUES ('annafisher', 160);
+INSERT INTO public.optional_course_enrollment VALUES ('suzannelinahan', 93);
+INSERT INTO public.optional_course_enrollment VALUES ('suzannelinahan', 53);
+INSERT INTO public.optional_course_enrollment VALUES ('suzannelinahan', 163);
+INSERT INTO public.optional_course_enrollment VALUES ('dianaedwards', 71);
+INSERT INTO public.optional_course_enrollment VALUES ('dianaedwards', 130);
+INSERT INTO public.optional_course_enrollment VALUES ('dianaedwards', 75);
+INSERT INTO public.optional_course_enrollment VALUES ('dianaedwards', 163);
+INSERT INTO public.optional_course_enrollment VALUES ('dianaedwards', 50);
+INSERT INTO public.optional_course_enrollment VALUES ('robertferenz', 178);
+INSERT INTO public.optional_course_enrollment VALUES ('robertferenz', 50);
+INSERT INTO public.optional_course_enrollment VALUES ('robertferenz', 71);
+INSERT INTO public.optional_course_enrollment VALUES ('mattievisher', 48);
+INSERT INTO public.optional_course_enrollment VALUES ('mattievisher', 43);
+INSERT INTO public.optional_course_enrollment VALUES ('mattievisher', 67);
+INSERT INTO public.optional_course_enrollment VALUES ('mattievisher', 127);
+INSERT INTO public.optional_course_enrollment VALUES ('larryruth', 19);
+INSERT INTO public.optional_course_enrollment VALUES ('larryruth', 47);
+INSERT INTO public.optional_course_enrollment VALUES ('larryruth', 25);
+INSERT INTO public.optional_course_enrollment VALUES ('josephdamian', 71);
+INSERT INTO public.optional_course_enrollment VALUES ('josephdamian', 145);
+INSERT INTO public.optional_course_enrollment VALUES ('josephdamian', 160);
+INSERT INTO public.optional_course_enrollment VALUES ('josephdamian', 22);
+INSERT INTO public.optional_course_enrollment VALUES ('josephdamian', 49);
+INSERT INTO public.optional_course_enrollment VALUES ('brandytaylor', 160);
+INSERT INTO public.optional_course_enrollment VALUES ('brandytaylor', 53);
+INSERT INTO public.optional_course_enrollment VALUES ('brandytaylor', 43);
+INSERT INTO public.optional_course_enrollment VALUES ('brandytaylor', 183);
+INSERT INTO public.optional_course_enrollment VALUES ('brandytaylor', 165);
+INSERT INTO public.optional_course_enrollment VALUES ('amandaking', 166);
+INSERT INTO public.optional_course_enrollment VALUES ('amandaking', 178);
+INSERT INTO public.optional_course_enrollment VALUES ('amandaking', 94);
+INSERT INTO public.optional_course_enrollment VALUES ('amandaking', 40);
+INSERT INTO public.optional_course_enrollment VALUES ('amandaking', 20);
+INSERT INTO public.optional_course_enrollment VALUES ('rickycelis', 111);
+INSERT INTO public.optional_course_enrollment VALUES ('rickycelis', 163);
+INSERT INTO public.optional_course_enrollment VALUES ('evatrujillo', 43);
+INSERT INTO public.optional_course_enrollment VALUES ('evatrujillo', 67);
+INSERT INTO public.optional_course_enrollment VALUES ('evatrujillo', 20);
+INSERT INTO public.optional_course_enrollment VALUES ('evatrujillo', 129);
+INSERT INTO public.optional_course_enrollment VALUES ('evatrujillo', 72);
+INSERT INTO public.optional_course_enrollment VALUES ('constanceculbertson', 127);
+INSERT INTO public.optional_course_enrollment VALUES ('constanceculbertson', 111);
+INSERT INTO public.optional_course_enrollment VALUES ('constanceculbertson', 165);
+INSERT INTO public.optional_course_enrollment VALUES ('constanceculbertson', 71);
+INSERT INTO public.optional_course_enrollment VALUES ('kirksnow', 112);
+INSERT INTO public.optional_course_enrollment VALUES ('kirksnow', 47);
+INSERT INTO public.optional_course_enrollment VALUES ('kirksnow', 21);
+INSERT INTO public.optional_course_enrollment VALUES ('jeannepennington', 163);
+INSERT INTO public.optional_course_enrollment VALUES ('robertakille', 157);
+INSERT INTO public.optional_course_enrollment VALUES ('robertakille', 165);
+INSERT INTO public.optional_course_enrollment VALUES ('robertakille', 93);
+INSERT INTO public.optional_course_enrollment VALUES ('robertakille', 127);
+INSERT INTO public.optional_course_enrollment VALUES ('robertakille', 160);
+INSERT INTO public.optional_course_enrollment VALUES ('phillipworkman', 94);
+INSERT INTO public.optional_course_enrollment VALUES ('phillipworkman', 127);
+INSERT INTO public.optional_course_enrollment VALUES ('phillipworkman', 91);
+INSERT INTO public.optional_course_enrollment VALUES ('phillipworkman', 183);
+INSERT INTO public.optional_course_enrollment VALUES ('phillipworkman', 184);
+INSERT INTO public.optional_course_enrollment VALUES ('randyschneider', 70);
+INSERT INTO public.optional_course_enrollment VALUES ('randyschneider', 165);
+INSERT INTO public.optional_course_enrollment VALUES ('randyschneider', 53);
+INSERT INTO public.optional_course_enrollment VALUES ('emilylozano', 91);
+INSERT INTO public.optional_course_enrollment VALUES ('emilylozano', 70);
+INSERT INTO public.optional_course_enrollment VALUES ('emilylozano', 49);
+INSERT INTO public.optional_course_enrollment VALUES ('emilylozano', 160);
+INSERT INTO public.optional_course_enrollment VALUES ('emilylozano', 112);
+INSERT INTO public.optional_course_enrollment VALUES ('pearlwilson', 72);
+INSERT INTO public.optional_course_enrollment VALUES ('charlessantarelli', 93);
+INSERT INTO public.optional_course_enrollment VALUES ('charlessantarelli', 48);
+INSERT INTO public.optional_course_enrollment VALUES ('charlessantarelli', 44);
+INSERT INTO public.optional_course_enrollment VALUES ('charlessantarelli', 129);
+INSERT INTO public.optional_course_enrollment VALUES ('charlessantarelli', 181);
+INSERT INTO public.optional_course_enrollment VALUES ('melvinnorris', 40);
+INSERT INTO public.optional_course_enrollment VALUES ('marygillan', 76);
+INSERT INTO public.optional_course_enrollment VALUES ('marygillan', 111);
+INSERT INTO public.optional_course_enrollment VALUES ('marygillan', 93);
+INSERT INTO public.optional_course_enrollment VALUES ('marygillan', 148);
+INSERT INTO public.optional_course_enrollment VALUES ('gracemccauley', 49);
+INSERT INTO public.optional_course_enrollment VALUES ('gracemccauley', 127);
+INSERT INTO public.optional_course_enrollment VALUES ('gracemccauley', 47);
+INSERT INTO public.optional_course_enrollment VALUES ('gracemccauley', 21);
+INSERT INTO public.optional_course_enrollment VALUES ('gracemccauley', 20);
+INSERT INTO public.optional_course_enrollment VALUES ('jackowen', 50);
+INSERT INTO public.optional_course_enrollment VALUES ('jackowen', 22);
+INSERT INTO public.optional_course_enrollment VALUES ('jackowen', 184);
+INSERT INTO public.optional_course_enrollment VALUES ('jackowen', 165);
+INSERT INTO public.optional_course_enrollment VALUES ('gwenndickerson', 70);
+INSERT INTO public.optional_course_enrollment VALUES ('gwenndickerson', 75);
+INSERT INTO public.optional_course_enrollment VALUES ('gwenndickerson', 26);
+INSERT INTO public.optional_course_enrollment VALUES ('gwenndickerson', 129);
+INSERT INTO public.optional_course_enrollment VALUES ('gwenndickerson', 163);
+INSERT INTO public.optional_course_enrollment VALUES ('laurarauch', 148);
+INSERT INTO public.optional_course_enrollment VALUES ('laurarauch', 20);
+INSERT INTO public.optional_course_enrollment VALUES ('laurarauch', 94);
+INSERT INTO public.optional_course_enrollment VALUES ('laurarauch', 49);
+INSERT INTO public.optional_course_enrollment VALUES ('hattiefowler', 47);
+INSERT INTO public.optional_course_enrollment VALUES ('ashleyahmadi', 129);
+INSERT INTO public.optional_course_enrollment VALUES ('ashleyahmadi', 163);
+INSERT INTO public.optional_course_enrollment VALUES ('ashleyahmadi', 166);
+INSERT INTO public.optional_course_enrollment VALUES ('ashleyahmadi', 109);
+INSERT INTO public.optional_course_enrollment VALUES ('ashleyahmadi', 19);
+INSERT INTO public.optional_course_enrollment VALUES ('michaelhaag', 26);
+INSERT INTO public.optional_course_enrollment VALUES ('michaelhaag', 145);
+INSERT INTO public.optional_course_enrollment VALUES ('michaelhaag', 157);
+INSERT INTO public.optional_course_enrollment VALUES ('michaelhaag', 73);
+INSERT INTO public.optional_course_enrollment VALUES ('marybergen', 44);
+INSERT INTO public.optional_course_enrollment VALUES ('marybergen', 28);
+INSERT INTO public.optional_course_enrollment VALUES ('marybergen', 165);
+INSERT INTO public.optional_course_enrollment VALUES ('christopherparker', 163);
+INSERT INTO public.optional_course_enrollment VALUES ('christopherparker', 183);
+INSERT INTO public.optional_course_enrollment VALUES ('christopherparker', 166);
+INSERT INTO public.optional_course_enrollment VALUES ('christopherparker', 22);
+INSERT INTO public.optional_course_enrollment VALUES ('christopherparker', 160);
+INSERT INTO public.optional_course_enrollment VALUES ('ellenbiros', 157);
+INSERT INTO public.optional_course_enrollment VALUES ('ellenbiros', 22);
+INSERT INTO public.optional_course_enrollment VALUES ('ellenbiros', 48);
+INSERT INTO public.optional_course_enrollment VALUES ('leonardking', 160);
+INSERT INTO public.optional_course_enrollment VALUES ('leonardking', 91);
+INSERT INTO public.optional_course_enrollment VALUES ('leonardking', 181);
+INSERT INTO public.optional_course_enrollment VALUES ('vickipanning', 40);
+INSERT INTO public.optional_course_enrollment VALUES ('vickipanning', 53);
+INSERT INTO public.optional_course_enrollment VALUES ('edithbrooks', 145);
+INSERT INTO public.optional_course_enrollment VALUES ('edithbrooks', 160);
+INSERT INTO public.optional_course_enrollment VALUES ('edithbrooks', 70);
+INSERT INTO public.optional_course_enrollment VALUES ('edithbrooks', 94);
+INSERT INTO public.optional_course_enrollment VALUES ('edithbrooks', 20);
+INSERT INTO public.optional_course_enrollment VALUES ('robertmcclellan', 53);
+INSERT INTO public.optional_course_enrollment VALUES ('katinasuomela', 40);
+INSERT INTO public.optional_course_enrollment VALUES ('katinasuomela', 20);
+INSERT INTO public.optional_course_enrollment VALUES ('marypujol', 112);
+INSERT INTO public.optional_course_enrollment VALUES ('marypujol', 160);
+INSERT INTO public.optional_course_enrollment VALUES ('eldonhammond', 71);
+INSERT INTO public.optional_course_enrollment VALUES ('eldonhammond', 48);
+INSERT INTO public.optional_course_enrollment VALUES ('eldonhammond', 163);
+INSERT INTO public.optional_course_enrollment VALUES ('eldonhammond', 43);
+INSERT INTO public.optional_course_enrollment VALUES ('rexpenderel', 181);
+INSERT INTO public.optional_course_enrollment VALUES ('rexpenderel', 183);
+INSERT INTO public.optional_course_enrollment VALUES ('rexpenderel', 129);
+INSERT INTO public.optional_course_enrollment VALUES ('jasonbrady', 111);
+INSERT INTO public.optional_course_enrollment VALUES ('jasonbrady', 130);
+INSERT INTO public.optional_course_enrollment VALUES ('jasonbrady', 183);
+INSERT INTO public.optional_course_enrollment VALUES ('jessicanolder', 127);
+INSERT INTO public.optional_course_enrollment VALUES ('jessicanolder', 71);
+INSERT INTO public.optional_course_enrollment VALUES ('jessicanolder', 53);
+INSERT INTO public.optional_course_enrollment VALUES ('jessicanolder', 52);
+INSERT INTO public.optional_course_enrollment VALUES ('elizabethweiker', 157);
+INSERT INTO public.optional_course_enrollment VALUES ('elizabethweiker', 50);
+INSERT INTO public.optional_course_enrollment VALUES ('elizabethweiker', 111);
+INSERT INTO public.optional_course_enrollment VALUES ('williamgilliland', 43);
+INSERT INTO public.optional_course_enrollment VALUES ('williamgilliland', 160);
+INSERT INTO public.optional_course_enrollment VALUES ('kathleenchisholm', 67);
+INSERT INTO public.optional_course_enrollment VALUES ('kathleenchisholm', 48);
+INSERT INTO public.optional_course_enrollment VALUES ('jeankelso', 71);
+INSERT INTO public.optional_course_enrollment VALUES ('jeankelso', 22);
+INSERT INTO public.optional_course_enrollment VALUES ('jeankelso', 165);
+
+
+--
+-- TOC entry 3396 (class 0 OID 16761)
+-- Dependencies: 215
+-- Data for Name: staff; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+INSERT INTO public.staff VALUES ('derekknapchuck', 'Derek Knapchuck');
+INSERT INTO public.staff VALUES ('ruthlovell', 'Ruth Lovell');
+INSERT INTO public.staff VALUES ('rogerwiley', 'Roger Wiley');
+INSERT INTO public.staff VALUES ('nikkihenderson', 'Nikki Henderson');
+INSERT INTO public.staff VALUES ('jeremydraper', 'Jeremy Draper');
+INSERT INTO public.staff VALUES ('annettehernandez', 'Annette Hernandez');
+INSERT INTO public.staff VALUES ('haroldgreb', 'Harold Greb');
+INSERT INTO public.staff VALUES ('thomaslarson', 'Thomas Larson');
+INSERT INTO public.staff VALUES ('williammcallister', 'William Mcallister');
+INSERT INTO public.staff VALUES ('robertleech', 'Robert Leech');
+INSERT INTO public.staff VALUES ('ahmaddouglas', 'Ahmad Douglas');
+INSERT INTO public.staff VALUES ('ericayoung', 'Erica Young');
+INSERT INTO public.staff VALUES ('johnhartsell', 'John Hartsell');
+INSERT INTO public.staff VALUES ('joebatte', 'Joe Batte');
+INSERT INTO public.staff VALUES ('bethpowers', 'Beth Powers');
+INSERT INTO public.staff VALUES ('jeffreycrawford', 'Jeffrey Crawford');
+INSERT INTO public.staff VALUES ('juanitawashington', 'Juanita Washington');
+INSERT INTO public.staff VALUES ('lancecover', 'Lance Cover');
+INSERT INTO public.staff VALUES ('edwardturner', 'Edward Turner');
+INSERT INTO public.staff VALUES ('ronaldflannery', 'Ronald Flannery');
+INSERT INTO public.staff VALUES ('josephhale', 'Joseph Hale');
+INSERT INTO public.staff VALUES ('williebrown', 'Willie Brown');
+INSERT INTO public.staff VALUES ('justindavis', 'Justin Davis');
+INSERT INTO public.staff VALUES ('timothyfay', 'Timothy Fay');
+INSERT INTO public.staff VALUES ('jonathanmcmillan', 'Jonathan Mcmillan');
+INSERT INTO public.staff VALUES ('harrietanderson', 'Harriet Anderson');
+INSERT INTO public.staff VALUES ('patriciahardage', 'Patricia Hardage');
+INSERT INTO public.staff VALUES ('ericawildey', 'Erica Wildey');
+INSERT INTO public.staff VALUES ('gordonpetty', 'Gordon Petty');
+INSERT INTO public.staff VALUES ('melindabrough', 'Melinda Brough');
+
+
+--
+-- TOC entry 3397 (class 0 OID 16768)
+-- Dependencies: 216
+-- Data for Name: student; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+INSERT INTO public.student VALUES ('Margaret Walker', 'margaretwalker', 78, NULL);
+INSERT INTO public.student VALUES ('Robert Ferenz', 'robertferenz', 119, NULL);
+INSERT INTO public.student VALUES ('Anna Fisher', 'annafisher', 44, NULL);
+INSERT INTO public.student VALUES ('Debra Harrington', 'debraharrington', 108, NULL);
+INSERT INTO public.student VALUES ('Jason Brady', 'jasonbrady', 102, NULL);
+INSERT INTO public.student VALUES ('Phillip Workman', 'phillipworkman', 15, NULL);
+INSERT INTO public.student VALUES ('Joseph Damian', 'josephdamian', 102, NULL);
+INSERT INTO public.student VALUES ('Kevin Degroot', 'kevindegroot', 79, NULL);
+INSERT INTO public.student VALUES ('Gwenn Dickerson', 'gwenndickerson', 40, NULL);
+INSERT INTO public.student VALUES ('Emily Lozano', 'emilylozano', 52, 20);
+INSERT INTO public.student VALUES ('Michael Haag', 'michaelhaag', 59, NULL);
+INSERT INTO public.student VALUES ('Mark Figueroa', 'markfigueroa', 33, NULL);
+INSERT INTO public.student VALUES ('Jose Ruzich', 'joseruzich', 90, NULL);
+INSERT INTO public.student VALUES ('Mary Gillan', 'marygillan', 111, NULL);
+INSERT INTO public.student VALUES ('Minnie Hamlin', 'minniehamlin', 118, NULL);
+INSERT INTO public.student VALUES ('Wendell Helm', 'wendellhelm', 20, NULL);
+INSERT INTO public.student VALUES ('Kirk Snow', 'kirksnow', 86, NULL);
+INSERT INTO public.student VALUES ('Evelyn Curry', 'evelyncurry', 78, NULL);
+INSERT INTO public.student VALUES ('Tracy Bell', 'tracybell', 105, 128);
+INSERT INTO public.student VALUES ('Holly Sower', 'hollysower', 121, NULL);
+INSERT INTO public.student VALUES ('Michael Granby', 'michaelgranby', 31, NULL);
+INSERT INTO public.student VALUES ('Dawn Williams', 'dawnwilliams', 114, NULL);
+INSERT INTO public.student VALUES ('Alfred Weinhold', 'alfredweinhold', 49, NULL);
+INSERT INTO public.student VALUES ('Tony Lee', 'tonylee', 97, NULL);
+INSERT INTO public.student VALUES ('Caridad Dicks', 'caridaddicks', 38, NULL);
+INSERT INTO public.student VALUES ('Charles Santarelli', 'charlessantarelli', 106, 60);
+INSERT INTO public.student VALUES ('Eva Trujillo', 'evatrujillo', 15, NULL);
+INSERT INTO public.student VALUES ('Eva Hall', 'evahall', 17, NULL);
+INSERT INTO public.student VALUES ('Jessica Nolder', 'jessicanolder', 85, NULL);
+INSERT INTO public.student VALUES ('Ricky Celis', 'rickycelis', 104, NULL);
+INSERT INTO public.student VALUES ('Hattie Fowler', 'hattiefowler', 75, NULL);
+INSERT INTO public.student VALUES ('Larry Ruth', 'larryruth', 38, NULL);
+INSERT INTO public.student VALUES ('Constance Culbertson', 'constanceculbertson', 97, NULL);
+INSERT INTO public.student VALUES ('Laura Rauch', 'laurarauch', 72, NULL);
+INSERT INTO public.student VALUES ('Bert Aguilar', 'bertaguilar', 72, NULL);
+INSERT INTO public.student VALUES ('Diana Edwards', 'dianaedwards', 57, NULL);
+INSERT INTO public.student VALUES ('Ellen Biros', 'ellenbiros', 61, 43);
+INSERT INTO public.student VALUES ('Scott Cooper', 'scottcooper', 18, NULL);
+INSERT INTO public.student VALUES ('Suzanne Linahan', 'suzannelinahan', 102, NULL);
+INSERT INTO public.student VALUES ('Susan Vargas', 'susanvargas', 44, NULL);
+INSERT INTO public.student VALUES ('Edith Brooks', 'edithbrooks', 70, NULL);
+INSERT INTO public.student VALUES ('Rhonda Elwell', 'rhondaelwell', 115, NULL);
+INSERT INTO public.student VALUES ('Love Gardiner', 'lovegardiner', 65, NULL);
+INSERT INTO public.student VALUES ('Rex Penderel', 'rexpenderel', 83, 19);
+INSERT INTO public.student VALUES ('Dedra Serviss', 'dedraserviss', 61, NULL);
+INSERT INTO public.student VALUES ('Randy Schneider', 'randyschneider', 30, NULL);
+INSERT INTO public.student VALUES ('Kevin Castro', 'kevincastro', 19, NULL);
+INSERT INTO public.student VALUES ('Billie Aragon', 'billiearagon', 75, NULL);
+INSERT INTO public.student VALUES ('Gary Davidson', 'garydavidson', 2, NULL);
+INSERT INTO public.student VALUES ('Mary Hancock', 'maryhancock', 34, NULL);
+INSERT INTO public.student VALUES ('Shauna Ward', 'shaunaward', 135, NULL);
+INSERT INTO public.student VALUES ('Brandy Taylor', 'brandytaylor', 86, NULL);
+INSERT INTO public.student VALUES ('Patsy Caudillo', 'patsycaudillo', 115, NULL);
+INSERT INTO public.student VALUES ('Young Schweitzer', 'youngschweitzer', 135, NULL);
+INSERT INTO public.student VALUES ('Christopher Parker', 'christopherparker', 71, NULL);
+INSERT INTO public.student VALUES ('Jack Owen', 'jackowen', 132, NULL);
+INSERT INTO public.student VALUES ('Maria Catron', 'mariacatron', 31, NULL);
+INSERT INTO public.student VALUES ('Sophia Valdes', 'sophiavaldes', 48, 128);
+INSERT INTO public.student VALUES ('Dean Fitzgerald', 'deanfitzgerald', 59, NULL);
+INSERT INTO public.student VALUES ('William Gilliland', 'williamgilliland', 29, NULL);
+INSERT INTO public.student VALUES ('Anthony Fiore', 'anthonyfiore', 49, NULL);
+INSERT INTO public.student VALUES ('Kathleen Chisholm', 'kathleenchisholm', 126, NULL);
+INSERT INTO public.student VALUES ('Mary Bergen', 'marybergen', 117, NULL);
+INSERT INTO public.student VALUES ('Eldon Hammond', 'eldonhammond', 96, NULL);
+INSERT INTO public.student VALUES ('Roberto Beeson', 'robertobeeson', 19, NULL);
+INSERT INTO public.student VALUES ('Monica Jones', 'monicajones', 107, NULL);
+INSERT INTO public.student VALUES ('Jean Kelso', 'jeankelso', 55, NULL);
+INSERT INTO public.student VALUES ('Laura Larue', 'lauralarue', 125, NULL);
+INSERT INTO public.student VALUES ('Elizabeth Weiker', 'elizabethweiker', 111, NULL);
+INSERT INTO public.student VALUES ('Mattie Visher', 'mattievisher', 7, NULL);
+INSERT INTO public.student VALUES ('Robert Mcclellan', 'robertmcclellan', 38, NULL);
+INSERT INTO public.student VALUES ('Andrew Gross', 'andrewgross', 19, NULL);
+INSERT INTO public.student VALUES ('Christopher Dias', 'christopherdias', 31, NULL);
+INSERT INTO public.student VALUES ('Jeanne Pennington', 'jeannepennington', 75, NULL);
+INSERT INTO public.student VALUES ('Melvin Norris', 'melvinnorris', 131, NULL);
+INSERT INTO public.student VALUES ('Edward Owings', 'edwardowings', 16, NULL);
+INSERT INTO public.student VALUES ('Son Templin', 'sontemplin', 1, NULL);
+INSERT INTO public.student VALUES ('Leonard King', 'leonardking', 51, NULL);
+INSERT INTO public.student VALUES ('Mary Pujol', 'marypujol', 16, 104);
+INSERT INTO public.student VALUES ('Richard Pollack', 'richardpollack', 87, NULL);
+INSERT INTO public.student VALUES ('Chris Johnson', 'chrisjohnson', 66, NULL);
+INSERT INTO public.student VALUES ('Russell Ziegler', 'russellziegler', 9, NULL);
+INSERT INTO public.student VALUES ('Deborah Buban', 'deborahbuban', 76, NULL);
+INSERT INTO public.student VALUES ('Robert Johnson', 'robertjohnson', 63, NULL);
+INSERT INTO public.student VALUES ('Charles Dexter', 'charlesdexter', 81, NULL);
+INSERT INTO public.student VALUES ('Rita Stephenson', 'ritastephenson', 63, NULL);
+INSERT INTO public.student VALUES ('Pearl Wilson', 'pearlwilson', 120, NULL);
+INSERT INTO public.student VALUES ('Amanda King', 'amandaking', 90, NULL);
+INSERT INTO public.student VALUES ('Katina Suomela', 'katinasuomela', 102, NULL);
+INSERT INTO public.student VALUES ('Ashley Ahmadi', 'ashleyahmadi', 115, NULL);
+INSERT INTO public.student VALUES ('Raymond Jensen', 'raymondjensen', 55, NULL);
+INSERT INTO public.student VALUES ('Roberta Kille', 'robertakille', 8, NULL);
+INSERT INTO public.student VALUES ('Michael Elza', 'michaelelza', 10, NULL);
+INSERT INTO public.student VALUES ('Leon Tobin', 'leontobin', 109, NULL);
+INSERT INTO public.student VALUES ('Alyssa Landry', 'alyssalandry', 61, NULL);
+INSERT INTO public.student VALUES ('Vicki Panning', 'vickipanning', 125, 68);
+INSERT INTO public.student VALUES ('Jeff Zielinski', 'jeffzielinski', 1, NULL);
+INSERT INTO public.student VALUES ('Corey Lloyd', 'coreylloyd', 79, NULL);
+INSERT INTO public.student VALUES ('Grace Mccauley', 'gracemccauley', 36, NULL);
+INSERT INTO public.student VALUES ('William Carroll', 'williamcarroll', 4, NULL);
+
+
+--
+-- TOC entry 3398 (class 0 OID 16775)
+-- Dependencies: 217
+-- Data for Name: studentenrollment; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+INSERT INTO public.studentenrollment VALUES ('margaretwalker', 6, 1);
+INSERT INTO public.studentenrollment VALUES ('robertferenz', 8, 3);
+INSERT INTO public.studentenrollment VALUES ('annafisher', 3, 3);
+INSERT INTO public.studentenrollment VALUES ('debraharrington', 8, 1);
+INSERT INTO public.studentenrollment VALUES ('jasonbrady', 7, 3);
+INSERT INTO public.studentenrollment VALUES ('phillipworkman', 1, 3);
+INSERT INTO public.studentenrollment VALUES ('josephdamian', 7, 3);
+INSERT INTO public.studentenrollment VALUES ('kevindegroot', 6, 1);
+INSERT INTO public.studentenrollment VALUES ('gwenndickerson', 3, 2);
+INSERT INTO public.studentenrollment VALUES ('emilylozano', 2, 1);
+INSERT INTO public.studentenrollment VALUES ('emilylozano', 4, 2);
+INSERT INTO public.studentenrollment VALUES ('michaelhaag', 4, 3);
+INSERT INTO public.studentenrollment VALUES ('markfigueroa', 3, 1);
+INSERT INTO public.studentenrollment VALUES ('joseruzich', 6, 3);
+INSERT INTO public.studentenrollment VALUES ('marygillan', 8, 2);
+INSERT INTO public.studentenrollment VALUES ('minniehamlin', 8, 3);
+INSERT INTO public.studentenrollment VALUES ('wendellhelm', 2, 1);
+INSERT INTO public.studentenrollment VALUES ('kirksnow', 6, 3);
+INSERT INTO public.studentenrollment VALUES ('evelyncurry', 6, 1);
+INSERT INTO public.studentenrollment VALUES ('tracybell', 7, 3);
+INSERT INTO public.studentenrollment VALUES ('tracybell', 9, 2);
+INSERT INTO public.studentenrollment VALUES ('hollysower', 9, 1);
+INSERT INTO public.studentenrollment VALUES ('michaelgranby', 3, 1);
+INSERT INTO public.studentenrollment VALUES ('dawnwilliams', 8, 2);
+INSERT INTO public.studentenrollment VALUES ('alfredweinhold', 4, 1);
+INSERT INTO public.studentenrollment VALUES ('tonylee', 7, 2);
+INSERT INTO public.studentenrollment VALUES ('caridaddicks', 3, 2);
+INSERT INTO public.studentenrollment VALUES ('charlessantarelli', 4, 3);
+INSERT INTO public.studentenrollment VALUES ('charlessantarelli', 8, 1);
+INSERT INTO public.studentenrollment VALUES ('evatrujillo', 1, 3);
+INSERT INTO public.studentenrollment VALUES ('evahall', 2, 1);
+INSERT INTO public.studentenrollment VALUES ('jessicanolder', 6, 2);
+INSERT INTO public.studentenrollment VALUES ('rickycelis', 7, 3);
+INSERT INTO public.studentenrollment VALUES ('hattiefowler', 5, 3);
+INSERT INTO public.studentenrollment VALUES ('larryruth', 3, 2);
+INSERT INTO public.studentenrollment VALUES ('constanceculbertson', 7, 2);
+INSERT INTO public.studentenrollment VALUES ('laurarauch', 5, 3);
+INSERT INTO public.studentenrollment VALUES ('bertaguilar', 5, 3);
+INSERT INTO public.studentenrollment VALUES ('dianaedwards', 4, 3);
+INSERT INTO public.studentenrollment VALUES ('ellenbiros', 3, 3);
+INSERT INTO public.studentenrollment VALUES ('ellenbiros', 5, 1);
+INSERT INTO public.studentenrollment VALUES ('scottcooper', 2, 1);
+INSERT INTO public.studentenrollment VALUES ('suzannelinahan', 7, 3);
+INSERT INTO public.studentenrollment VALUES ('susanvargas', 3, 3);
+INSERT INTO public.studentenrollment VALUES ('edithbrooks', 5, 2);
+INSERT INTO public.studentenrollment VALUES ('rhondaelwell', 8, 2);
+INSERT INTO public.studentenrollment VALUES ('lovegardiner', 5, 1);
+INSERT INTO public.studentenrollment VALUES ('rexpenderel', 2, 1);
+INSERT INTO public.studentenrollment VALUES ('rexpenderel', 6, 2);
+INSERT INTO public.studentenrollment VALUES ('dedraserviss', 5, 1);
+INSERT INTO public.studentenrollment VALUES ('randyschneider', 2, 3);
+INSERT INTO public.studentenrollment VALUES ('kevincastro', 2, 1);
+INSERT INTO public.studentenrollment VALUES ('billiearagon', 5, 3);
+INSERT INTO public.studentenrollment VALUES ('garydavidson', 1, 1);
+INSERT INTO public.studentenrollment VALUES ('maryhancock', 3, 1);
+INSERT INTO public.studentenrollment VALUES ('shaunaward', 9, 3);
+INSERT INTO public.studentenrollment VALUES ('brandytaylor', 6, 3);
+INSERT INTO public.studentenrollment VALUES ('patsycaudillo', 8, 2);
+INSERT INTO public.studentenrollment VALUES ('youngschweitzer', 9, 3);
+INSERT INTO public.studentenrollment VALUES ('christopherparker', 5, 3);
+INSERT INTO public.studentenrollment VALUES ('jackowen', 9, 3);
+INSERT INTO public.studentenrollment VALUES ('mariacatron', 3, 1);
+INSERT INTO public.studentenrollment VALUES ('sophiavaldes', 4, 1);
+INSERT INTO public.studentenrollment VALUES ('sophiavaldes', 9, 2);
+INSERT INTO public.studentenrollment VALUES ('deanfitzgerald', 4, 3);
+INSERT INTO public.studentenrollment VALUES ('williamgilliland', 2, 3);
+INSERT INTO public.studentenrollment VALUES ('anthonyfiore', 4, 1);
+INSERT INTO public.studentenrollment VALUES ('kathleenchisholm', 9, 2);
+INSERT INTO public.studentenrollment VALUES ('marybergen', 8, 3);
+INSERT INTO public.studentenrollment VALUES ('eldonhammond', 7, 2);
+INSERT INTO public.studentenrollment VALUES ('robertobeeson', 2, 1);
+INSERT INTO public.studentenrollment VALUES ('monicajones', 8, 1);
+INSERT INTO public.studentenrollment VALUES ('jeankelso', 4, 2);
+INSERT INTO public.studentenrollment VALUES ('lauralarue', 9, 1);
+INSERT INTO public.studentenrollment VALUES ('elizabethweiker', 8, 2);
+INSERT INTO public.studentenrollment VALUES ('mattievisher', 1, 2);
+INSERT INTO public.studentenrollment VALUES ('robertmcclellan', 3, 2);
+INSERT INTO public.studentenrollment VALUES ('andrewgross', 2, 1);
+INSERT INTO public.studentenrollment VALUES ('christopherdias', 3, 1);
+INSERT INTO public.studentenrollment VALUES ('jeannepennington', 5, 3);
+INSERT INTO public.studentenrollment VALUES ('melvinnorris', 9, 3);
+INSERT INTO public.studentenrollment VALUES ('edwardowings', 2, 1);
+INSERT INTO public.studentenrollment VALUES ('sontemplin', 1, 1);
+INSERT INTO public.studentenrollment VALUES ('leonardking', 4, 2);
+INSERT INTO public.studentenrollment VALUES ('marypujol', 2, 1);
+INSERT INTO public.studentenrollment VALUES ('marypujol', 7, 3);
+INSERT INTO public.studentenrollment VALUES ('richardpollack', 6, 3);
+INSERT INTO public.studentenrollment VALUES ('chrisjohnson', 5, 2);
+INSERT INTO public.studentenrollment VALUES ('russellziegler', 1, 2);
+INSERT INTO public.studentenrollment VALUES ('deborahbuban', 6, 1);
+INSERT INTO public.studentenrollment VALUES ('robertjohnson', 5, 1);
+INSERT INTO public.studentenrollment VALUES ('charlesdexter', 6, 2);
+INSERT INTO public.studentenrollment VALUES ('ritastephenson', 5, 1);
+INSERT INTO public.studentenrollment VALUES ('pearlwilson', 8, 3);
+INSERT INTO public.studentenrollment VALUES ('amandaking', 6, 3);
+INSERT INTO public.studentenrollment VALUES ('katinasuomela', 7, 3);
+INSERT INTO public.studentenrollment VALUES ('ashleyahmadi', 8, 2);
+INSERT INTO public.studentenrollment VALUES ('raymondjensen', 4, 2);
+INSERT INTO public.studentenrollment VALUES ('robertakille', 1, 2);
+INSERT INTO public.studentenrollment VALUES ('michaelelza', 1, 2);
+INSERT INTO public.studentenrollment VALUES ('leontobin', 8, 1);
+INSERT INTO public.studentenrollment VALUES ('alyssalandry', 5, 1);
+INSERT INTO public.studentenrollment VALUES ('vickipanning', 5, 2);
+INSERT INTO public.studentenrollment VALUES ('vickipanning', 9, 1);
+INSERT INTO public.studentenrollment VALUES ('jeffzielinski', 1, 1);
+INSERT INTO public.studentenrollment VALUES ('coreylloyd', 6, 1);
+INSERT INTO public.studentenrollment VALUES ('gracemccauley', 3, 2);
+INSERT INTO public.studentenrollment VALUES ('williamcarroll', 1, 1);
+
+
+--
+-- TOC entry 3399 (class 0 OID 16782)
+-- Dependencies: 218
+-- Data for Name: teacher; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+INSERT INTO public.teacher VALUES ('charlespress', 'Charles Press');
+INSERT INTO public.teacher VALUES ('kathleenjohnson', 'Kathleen Johnson');
+INSERT INTO public.teacher VALUES ('lindaparish', 'Linda Parish');
+INSERT INTO public.teacher VALUES ('maryschober', 'Mary Schober');
+INSERT INTO public.teacher VALUES ('ashleyortega', 'Ashley Ortega');
+INSERT INTO public.teacher VALUES ('chrisjean', 'Chris Jean');
+INSERT INTO public.teacher VALUES ('marieprice', 'Marie Price');
+INSERT INTO public.teacher VALUES ('jenniferlamb', 'Jennifer Lamb');
+INSERT INTO public.teacher VALUES ('jeffreyseidman', 'Jeffrey Seidman');
+INSERT INTO public.teacher VALUES ('nancygood', 'Nancy Good');
+INSERT INTO public.teacher VALUES ('teresabutts', 'Teresa Butts');
+INSERT INTO public.teacher VALUES ('eliahorn', 'Elia Horn');
+INSERT INTO public.teacher VALUES ('rickeymercado', 'Rickey Mercado');
+INSERT INTO public.teacher VALUES ('jarvisdifranco', 'Jarvis Difranco');
+INSERT INTO public.teacher VALUES ('paulsteele', 'Paul Steele');
+INSERT INTO public.teacher VALUES ('nataliemessenger', 'Natalie Messenger');
+INSERT INTO public.teacher VALUES ('reginacastle', 'Regina Castle');
+INSERT INTO public.teacher VALUES ('christiankleinpeter', 'Christian Kleinpeter');
+INSERT INTO public.teacher VALUES ('markwillie', 'Mark Willie');
+INSERT INTO public.teacher VALUES ('johnavila', 'John Avila');
+INSERT INTO public.teacher VALUES ('majorstokes', 'Major Stokes');
+INSERT INTO public.teacher VALUES ('lilliansmith', 'Lillian Smith');
+INSERT INTO public.teacher VALUES ('donnaduvall', 'Donna Duvall');
+INSERT INTO public.teacher VALUES ('miguelroberts', 'Miguel Roberts');
+INSERT INTO public.teacher VALUES ('jeffcooper', 'Jeff Cooper');
+INSERT INTO public.teacher VALUES ('rafaelparton', 'Rafael Parton');
+INSERT INTO public.teacher VALUES ('richardgosnell', 'Richard Gosnell');
+INSERT INTO public.teacher VALUES ('aliceward', 'Alice Ward');
+INSERT INTO public.teacher VALUES ('michaelgarver', 'Michael Garver');
+INSERT INTO public.teacher VALUES ('davidgouldman', 'David Gouldman');
+INSERT INTO public.teacher VALUES ('charlesmcbride', 'Charles Mcbride');
+INSERT INTO public.teacher VALUES ('jantotten', 'Jan Totten');
+INSERT INTO public.teacher VALUES ('ruthballard', 'Ruth Ballard');
+INSERT INTO public.teacher VALUES ('jennyneidig', 'Jenny Neidig');
+INSERT INTO public.teacher VALUES ('silviapuente', 'Silvia Puente');
+INSERT INTO public.teacher VALUES ('matthewhippen', 'Matthew Hippen');
+INSERT INTO public.teacher VALUES ('williambrandon', 'William Brandon');
+INSERT INTO public.teacher VALUES ('frankboggan', 'Frank Boggan');
+INSERT INTO public.teacher VALUES ('robertford', 'Robert Ford');
+INSERT INTO public.teacher VALUES ('johnrodriguez', 'John Rodriguez');
+INSERT INTO public.teacher VALUES ('daviddailey', 'David Dailey');
+INSERT INTO public.teacher VALUES ('louishaskins', 'Louis Haskins');
+INSERT INTO public.teacher VALUES ('jeremydiller', 'Jeremy Diller');
+INSERT INTO public.teacher VALUES ('davidmartin', 'David Martin');
+INSERT INTO public.teacher VALUES ('jasonackland', 'Jason Ackland');
+INSERT INTO public.teacher VALUES ('rhondalyles', 'Rhonda Lyles');
+INSERT INTO public.teacher VALUES ('helensees', 'Helen Sees');
+INSERT INTO public.teacher VALUES ('jackthomas', 'Jack Thomas');
+INSERT INTO public.teacher VALUES ('dianestoner', 'Diane Stoner');
+INSERT INTO public.teacher VALUES ('leonorton', 'Leo Norton');
+INSERT INTO public.teacher VALUES ('wendygibbs', 'Wendy Gibbs');
+INSERT INTO public.teacher VALUES ('generaver', 'Gene Raver');
+INSERT INTO public.teacher VALUES ('anthonystemple', 'Anthony Stemple');
+INSERT INTO public.teacher VALUES ('susiehiggins', 'Susie Higgins');
+INSERT INTO public.teacher VALUES ('herbertdenault', 'Herbert Denault');
+INSERT INTO public.teacher VALUES ('josephcruz', 'Joseph Cruz');
+INSERT INTO public.teacher VALUES ('caseyblue', 'Casey Blue');
+INSERT INTO public.teacher VALUES ('elmerhayes', 'Elmer Hayes');
+INSERT INTO public.teacher VALUES ('davidwixon', 'David Wixon');
+INSERT INTO public.teacher VALUES ('melvinkautz', 'Melvin Kautz');
+INSERT INTO public.teacher VALUES ('sonjasievers', 'Sonja Sievers');
+INSERT INTO public.teacher VALUES ('adelinafultz', 'Adelina Fultz');
+INSERT INTO public.teacher VALUES ('jamesholman', 'James Holman');
+INSERT INTO public.teacher VALUES ('earnestinesuarez', 'Earnestine Suarez');
+INSERT INTO public.teacher VALUES ('geraldshamapande', 'Gerald Shamapande');
+INSERT INTO public.teacher VALUES ('rogerdawson', 'Roger Dawson');
+INSERT INTO public.teacher VALUES ('terrawelch', 'Terra Welch');
+INSERT INTO public.teacher VALUES ('rodbain', 'Rod Bain');
+INSERT INTO public.teacher VALUES ('kristophernasuti', 'Kristopher Nasuti');
+INSERT INTO public.teacher VALUES ('michaeloatney', 'Michael Oatney');
+
+
+--
+-- TOC entry 3400 (class 0 OID 16789)
+-- Dependencies: 219
+-- Data for Name: user; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+INSERT INTO public."user" VALUES ('a', 'a', 'Student');
+INSERT INTO public."user" VALUES ('derekknapchuck', '04FP2F1ANA', 'staff');
+INSERT INTO public."user" VALUES ('ruthlovell', '1QDJ8EQGNU', 'staff');
+INSERT INTO public."user" VALUES ('rogerwiley', 'IJYF8E2KEA', 'staff');
+INSERT INTO public."user" VALUES ('nikkihenderson', '9DA0DMOIZ', 'staff');
+INSERT INTO public."user" VALUES ('jeremydraper', '7332Y9GJ5BD6', 'staff');
+INSERT INTO public."user" VALUES ('annettehernandez', 'DNR9ZM3OBF2', 'staff');
+INSERT INTO public."user" VALUES ('haroldgreb', 'DX3DJU9L', 'staff');
+INSERT INTO public."user" VALUES ('thomaslarson', 'LSB92EY9', 'staff');
+INSERT INTO public."user" VALUES ('williammcallister', 'P1HOFC258W', 'staff');
+INSERT INTO public."user" VALUES ('robertleech', '2MBHV1JLE', 'staff');
+INSERT INTO public."user" VALUES ('ahmaddouglas', '5RJ811CNQHN', 'staff');
+INSERT INTO public."user" VALUES ('ericayoung', 'G9UDBEVY', 'staff');
+INSERT INTO public."user" VALUES ('johnhartsell', 'NDHKJY4FTZGD', 'staff');
+INSERT INTO public."user" VALUES ('joebatte', '0Y6DWY0V', 'staff');
+INSERT INTO public."user" VALUES ('bethpowers', '8UY9VMUTSK', 'staff');
+INSERT INTO public."user" VALUES ('jeffreycrawford', '6H434OAN79PX', 'staff');
+INSERT INTO public."user" VALUES ('juanitawashington', 'XDMTDDKT2', 'staff');
+INSERT INTO public."user" VALUES ('lancecover', 'QXF3MQO3H2', 'staff');
+INSERT INTO public."user" VALUES ('edwardturner', 'P926KN8NH1CR', 'staff');
+INSERT INTO public."user" VALUES ('ronaldflannery', 'BOQMR3D5D20', 'staff');
+INSERT INTO public."user" VALUES ('josephhale', '5A8S7VJH', 'staff');
+INSERT INTO public."user" VALUES ('williebrown', 'Q4G8PMO9WXB', 'staff');
+INSERT INTO public."user" VALUES ('justindavis', '7UG3JC50A', 'staff');
+INSERT INTO public."user" VALUES ('timothyfay', 'FB1MIEQE6GL', 'staff');
+INSERT INTO public."user" VALUES ('jonathanmcmillan', 'BPX3GWSHVD', 'staff');
+INSERT INTO public."user" VALUES ('harrietanderson', 'C0MFZ6CAQ', 'staff');
+INSERT INTO public."user" VALUES ('patriciahardage', '7LAHRA8CA0', 'staff');
+INSERT INTO public."user" VALUES ('ericawildey', 'A2Y30TL9SB', 'staff');
+INSERT INTO public."user" VALUES ('gordonpetty', 'DEWF93JW9', 'staff');
+INSERT INTO public."user" VALUES ('melindabrough', '7HSA1RA9KV', 'staff');
+INSERT INTO public."user" VALUES ('charlespress', '1FQ9PX9ZXAF0', 'teacher');
+INSERT INTO public."user" VALUES ('kathleenjohnson', 'X9RY7YMR', 'teacher');
+INSERT INTO public."user" VALUES ('lindaparish', '7ZELTEIAGBJ', 'teacher');
+INSERT INTO public."user" VALUES ('maryschober', '7VVLOXN2', 'teacher');
+INSERT INTO public."user" VALUES ('ashleyortega', 'LWI1VPLCNR', 'teacher');
+INSERT INTO public."user" VALUES ('chrisjean', 'D50KZMJQJO9', 'teacher');
+INSERT INTO public."user" VALUES ('marieprice', 'BAPQ89S14', 'teacher');
+INSERT INTO public."user" VALUES ('jenniferlamb', 'DI0IOH3CZ', 'teacher');
+INSERT INTO public."user" VALUES ('jeffreyseidman', 'F7G6ETWYW', 'teacher');
+INSERT INTO public."user" VALUES ('nancygood', 'X0KQTOBCA', 'teacher');
+INSERT INTO public."user" VALUES ('teresabutts', 'EMLDE0N12', 'teacher');
+INSERT INTO public."user" VALUES ('eliahorn', '3RS6FGVYG', 'teacher');
+INSERT INTO public."user" VALUES ('rickeymercado', 'VZGW7WJ6S83Y', 'teacher');
+INSERT INTO public."user" VALUES ('jarvisdifranco', 'FFN84Z0E7', 'teacher');
+INSERT INTO public."user" VALUES ('paulsteele', 'SY0QK3OJTR6G', 'teacher');
+INSERT INTO public."user" VALUES ('nataliemessenger', '3N483V1KBZUB', 'teacher');
+INSERT INTO public."user" VALUES ('reginacastle', 'YGA220Y4Y', 'teacher');
+INSERT INTO public."user" VALUES ('christiankleinpeter', '9MVC9KVCAWBS', 'teacher');
+INSERT INTO public."user" VALUES ('markwillie', 'YIQDFNI6X4I8', 'teacher');
+INSERT INTO public."user" VALUES ('johnavila', 'CDCT07R5J', 'teacher');
+INSERT INTO public."user" VALUES ('majorstokes', '5H40V46EE', 'teacher');
+INSERT INTO public."user" VALUES ('lilliansmith', 'KV85P6PY', 'teacher');
+INSERT INTO public."user" VALUES ('donnaduvall', 'J98EYW6SBMTU', 'teacher');
+INSERT INTO public."user" VALUES ('miguelroberts', 'HK6LVTZUD', 'teacher');
+INSERT INTO public."user" VALUES ('jeffcooper', 'GYPCXJTO9N', 'teacher');
+INSERT INTO public."user" VALUES ('rafaelparton', '0RKTE91NL', 'teacher');
+INSERT INTO public."user" VALUES ('richardgosnell', '6E6MO2HZ', 'teacher');
+INSERT INTO public."user" VALUES ('aliceward', 'ZM83MLBMFQXL', 'teacher');
+INSERT INTO public."user" VALUES ('michaelgarver', '7YWR4ULRC', 'teacher');
+INSERT INTO public."user" VALUES ('davidgouldman', 'P1YR6AB5N9UB', 'teacher');
+INSERT INTO public."user" VALUES ('charlesmcbride', 'YPAG8FD4OSHG', 'teacher');
+INSERT INTO public."user" VALUES ('jantotten', 'QE8XXLFH0', 'teacher');
+INSERT INTO public."user" VALUES ('ruthballard', '5U90S0GAAY', 'teacher');
+INSERT INTO public."user" VALUES ('jennyneidig', '7D2R3YQJC', 'teacher');
+INSERT INTO public."user" VALUES ('silviapuente', 'TYOTOJRR', 'teacher');
+INSERT INTO public."user" VALUES ('matthewhippen', 'U4QS4NLM', 'teacher');
+INSERT INTO public."user" VALUES ('williambrandon', 'K7Q0K26J', 'teacher');
+INSERT INTO public."user" VALUES ('frankboggan', 'IVOQUU2FC', 'teacher');
+INSERT INTO public."user" VALUES ('robertford', '5P1PKEPV8JOS', 'teacher');
+INSERT INTO public."user" VALUES ('johnrodriguez', 'MCXELK6M', 'teacher');
+INSERT INTO public."user" VALUES ('daviddailey', 'CBP8ZCA1', 'teacher');
+INSERT INTO public."user" VALUES ('louishaskins', 'L5TCE3W8XO5', 'teacher');
+INSERT INTO public."user" VALUES ('jeremydiller', 'EBBJMSCQ', 'teacher');
+INSERT INTO public."user" VALUES ('davidmartin', '148W4V3XNDZJ', 'teacher');
+INSERT INTO public."user" VALUES ('jasonackland', 'GZH1Y559TH0', 'teacher');
+INSERT INTO public."user" VALUES ('rhondalyles', 'R4DC8SVZS', 'teacher');
+INSERT INTO public."user" VALUES ('helensees', 'HAO4Y47Z5A', 'teacher');
+INSERT INTO public."user" VALUES ('jackthomas', 'QD4VUS4HPFK', 'teacher');
+INSERT INTO public."user" VALUES ('dianestoner', '7IO08TVCXU5', 'teacher');
+INSERT INTO public."user" VALUES ('leonorton', 'IXZU1C3DJZYU', 'teacher');
+INSERT INTO public."user" VALUES ('wendygibbs', '77AZQHRIUZ', 'teacher');
+INSERT INTO public."user" VALUES ('generaver', 'MHTVNJK7Z7', 'teacher');
+INSERT INTO public."user" VALUES ('anthonystemple', 'P7487QVIVD9', 'teacher');
+INSERT INTO public."user" VALUES ('susiehiggins', 'V7DQW4TSXGP', 'teacher');
+INSERT INTO public."user" VALUES ('herbertdenault', 'INICH5RK', 'teacher');
+INSERT INTO public."user" VALUES ('josephcruz', 'TBGZ27K8XMY1', 'teacher');
+INSERT INTO public."user" VALUES ('caseyblue', 'BWLI1PZ6QN', 'teacher');
+INSERT INTO public."user" VALUES ('elmerhayes', 'NWS0YSJPISG', 'teacher');
+INSERT INTO public."user" VALUES ('davidwixon', 'AWKL7XTJZOW', 'teacher');
+INSERT INTO public."user" VALUES ('melvinkautz', 'S2QJ3NLD', 'teacher');
+INSERT INTO public."user" VALUES ('sonjasievers', 'V3BRIIBVNUW', 'teacher');
+INSERT INTO public."user" VALUES ('adelinafultz', '345Y24ZEVTH', 'teacher');
+INSERT INTO public."user" VALUES ('jamesholman', 'WTW3FTUZ', 'teacher');
+INSERT INTO public."user" VALUES ('earnestinesuarez', '8G7F9MWV', 'teacher');
+INSERT INTO public."user" VALUES ('geraldshamapande', 'WSNA71P7GB', 'teacher');
+INSERT INTO public."user" VALUES ('rogerdawson', 'GJ0U4IVE', 'teacher');
+INSERT INTO public."user" VALUES ('terrawelch', 'SZ71KAVF85', 'teacher');
+INSERT INTO public."user" VALUES ('rodbain', 'VH9CAKE1MOBA', 'teacher');
+INSERT INTO public."user" VALUES ('kristophernasuti', 'TP5UGPTWKB1', 'teacher');
+INSERT INTO public."user" VALUES ('michaeloatney', 'JQVCZ1KY8O', 'teacher');
+INSERT INTO public."user" VALUES ('margaretwalker', 'LN6YXKPE3UO9', 'student');
+INSERT INTO public."user" VALUES ('robertferenz', 'XEIHWKW6HM', 'student');
+INSERT INTO public."user" VALUES ('annafisher', 'Q0GEXUU5X5', 'student');
+INSERT INTO public."user" VALUES ('debraharrington', 'TIEM95C7O', 'student');
+INSERT INTO public."user" VALUES ('jasonbrady', 'CXOKAWMM', 'student');
+INSERT INTO public."user" VALUES ('phillipworkman', 'H4SBTDOM4I5', 'student');
+INSERT INTO public."user" VALUES ('josephdamian', 'GO23RKS8A', 'student');
+INSERT INTO public."user" VALUES ('kevindegroot', 'KSKV1YJA', 'student');
+INSERT INTO public."user" VALUES ('gwenndickerson', 'GNM6NUSZI', 'student');
+INSERT INTO public."user" VALUES ('emilylozano', 'TAY7SJ0V', 'student');
+INSERT INTO public."user" VALUES ('michaelhaag', 'ECSA4FUEY08', 'student');
+INSERT INTO public."user" VALUES ('markfigueroa', '18U45Z18', 'student');
+INSERT INTO public."user" VALUES ('joseruzich', 'U4MWPVCM39', 'student');
+INSERT INTO public."user" VALUES ('marygillan', 'US3FYJFJCV', 'student');
+INSERT INTO public."user" VALUES ('minniehamlin', 'E8BRN2OT250Y', 'student');
+INSERT INTO public."user" VALUES ('wendellhelm', 'S7NAI11GWS', 'student');
+INSERT INTO public."user" VALUES ('kirksnow', 'BEPDDRCZYO1', 'student');
+INSERT INTO public."user" VALUES ('evelyncurry', '94JU16ER831', 'student');
+INSERT INTO public."user" VALUES ('tracybell', 'DJC59K6Y', 'student');
+INSERT INTO public."user" VALUES ('hollysower', 'RGDDB2ZJ4ZRE', 'student');
+INSERT INTO public."user" VALUES ('michaelgranby', '4ZBNH0VC5V', 'student');
+INSERT INTO public."user" VALUES ('dawnwilliams', '946JLQDWDWL9', 'student');
+INSERT INTO public."user" VALUES ('alfredweinhold', 'N0HBCH3IAFAE', 'student');
+INSERT INTO public."user" VALUES ('tonylee', 'LQIIBFNQ', 'student');
+INSERT INTO public."user" VALUES ('caridaddicks', 'Z7VBQSWG1XTU', 'student');
+INSERT INTO public."user" VALUES ('charlessantarelli', '4BHJI0N73P', 'student');
+INSERT INTO public."user" VALUES ('evatrujillo', 'ZRK6YLZK', 'student');
+INSERT INTO public."user" VALUES ('evahall', '5J4I4SJ7OM', 'student');
+INSERT INTO public."user" VALUES ('jessicanolder', 'QB3I0F7R5', 'student');
+INSERT INTO public."user" VALUES ('rickycelis', '3ZC7MVFODXTH', 'student');
+INSERT INTO public."user" VALUES ('hattiefowler', '5NMT3NVG8VIC', 'student');
+INSERT INTO public."user" VALUES ('larryruth', 'RXY5U82XIQV', 'student');
+INSERT INTO public."user" VALUES ('constanceculbertson', 'DURNCEM32', 'student');
+INSERT INTO public."user" VALUES ('laurarauch', '9AOHPCTUHD', 'student');
+INSERT INTO public."user" VALUES ('bertaguilar', 'C2NM74FRLAE', 'student');
+INSERT INTO public."user" VALUES ('dianaedwards', 'OD1CDW2W', 'student');
+INSERT INTO public."user" VALUES ('ellenbiros', '8XG9MEXSQ', 'student');
+INSERT INTO public."user" VALUES ('scottcooper', 'CLEVM3ZX0K', 'student');
+INSERT INTO public."user" VALUES ('suzannelinahan', 'AADUJRTANQ', 'student');
+INSERT INTO public."user" VALUES ('susanvargas', 'J1HQHKQV', 'student');
+INSERT INTO public."user" VALUES ('edithbrooks', 'ELQ5Z76LLU4U', 'student');
+INSERT INTO public."user" VALUES ('rhondaelwell', 'NFBAUT6J', 'student');
+INSERT INTO public."user" VALUES ('lovegardiner', 'DTODQIQYNQ', 'student');
+INSERT INTO public."user" VALUES ('rexpenderel', '7FF7P7XO3T', 'student');
+INSERT INTO public."user" VALUES ('dedraserviss', 'HZLOM6SR7G', 'student');
+INSERT INTO public."user" VALUES ('randyschneider', 'NXP8DSE3', 'student');
+INSERT INTO public."user" VALUES ('kevincastro', 'JSCMTZ7Y6OM', 'student');
+INSERT INTO public."user" VALUES ('billiearagon', '2GKJHNKDI2JQ', 'student');
+INSERT INTO public."user" VALUES ('garydavidson', '3W0DWSN480', 'student');
+INSERT INTO public."user" VALUES ('maryhancock', 'NDH7ZDUIT41P', 'student');
+INSERT INTO public."user" VALUES ('shaunaward', 'SFKKNAOI4', 'student');
+INSERT INTO public."user" VALUES ('brandytaylor', 'PDWQOI21F0V', 'student');
+INSERT INTO public."user" VALUES ('patsycaudillo', 'WNFCHVUI', 'student');
+INSERT INTO public."user" VALUES ('youngschweitzer', '6B687P6QF', 'student');
+INSERT INTO public."user" VALUES ('christopherparker', '4FDWF5STED9S', 'student');
+INSERT INTO public."user" VALUES ('jackowen', 'BIYYND6P3', 'student');
+INSERT INTO public."user" VALUES ('mariacatron', 'Q5X9TUHDD', 'student');
+INSERT INTO public."user" VALUES ('sophiavaldes', 'HLSB7EYIUNRL', 'student');
+INSERT INTO public."user" VALUES ('deanfitzgerald', 'G9KQ6P64HQ5X', 'student');
+INSERT INTO public."user" VALUES ('williamgilliland', 'Q7K7SP6TPRD', 'student');
+INSERT INTO public."user" VALUES ('anthonyfiore', 'C6ZVNQJ9A', 'student');
+INSERT INTO public."user" VALUES ('kathleenchisholm', '8D9SKHBOQ2F', 'student');
+INSERT INTO public."user" VALUES ('marybergen', 'R7UDXNK7MZGI', 'student');
+INSERT INTO public."user" VALUES ('eldonhammond', 'FKN7F5EJYJ', 'student');
+INSERT INTO public."user" VALUES ('robertobeeson', 'DNZKYMXMUM', 'student');
+INSERT INTO public."user" VALUES ('monicajones', 'SFLN5WC2C5', 'student');
+INSERT INTO public."user" VALUES ('jeankelso', '5BQGEHBFT', 'student');
+INSERT INTO public."user" VALUES ('lauralarue', 'MHBZLQLX', 'student');
+INSERT INTO public."user" VALUES ('elizabethweiker', 'H9Z1TNFES4TT', 'student');
+INSERT INTO public."user" VALUES ('mattievisher', 'FIGJYF50W', 'student');
+INSERT INTO public."user" VALUES ('robertmcclellan', 'YI6LI2RE5EO', 'student');
+INSERT INTO public."user" VALUES ('andrewgross', 'E36VEAAY3P6', 'student');
+INSERT INTO public."user" VALUES ('christopherdias', 'CXKCEKFH22Y', 'student');
+INSERT INTO public."user" VALUES ('jeannepennington', '4ARN5CCCOS', 'student');
+INSERT INTO public."user" VALUES ('melvinnorris', '6EKU5W553', 'student');
+INSERT INTO public."user" VALUES ('edwardowings', 'FPIBB8PH69V8', 'student');
+INSERT INTO public."user" VALUES ('sontemplin', 'QP79TZ7KJ5R8', 'student');
+INSERT INTO public."user" VALUES ('leonardking', 'QXNMUISV', 'student');
+INSERT INTO public."user" VALUES ('marypujol', 'JYZDKMKM3', 'student');
+INSERT INTO public."user" VALUES ('richardpollack', 'GJGNC24P', 'student');
+INSERT INTO public."user" VALUES ('chrisjohnson', 'XQGM28FI', 'student');
+INSERT INTO public."user" VALUES ('russellziegler', 'AO6JPHMB', 'student');
+INSERT INTO public."user" VALUES ('deborahbuban', 'WLMW3YH9', 'student');
+INSERT INTO public."user" VALUES ('robertjohnson', 'HR1X0KW84V', 'student');
+INSERT INTO public."user" VALUES ('charlesdexter', 'H1EOX99OPH', 'student');
+INSERT INTO public."user" VALUES ('ritastephenson', 'URTMDK1M', 'student');
+INSERT INTO public."user" VALUES ('pearlwilson', '38VLFUNF21', 'student');
+INSERT INTO public."user" VALUES ('amandaking', 'VRKA5KM0XG', 'student');
+INSERT INTO public."user" VALUES ('katinasuomela', 'RESOVCZBEI7', 'student');
+INSERT INTO public."user" VALUES ('ashleyahmadi', 'FJN2E28J3', 'student');
+INSERT INTO public."user" VALUES ('raymondjensen', '9JP9O7XL3F5N', 'student');
+INSERT INTO public."user" VALUES ('robertakille', 'ATQ64VOIN', 'student');
+INSERT INTO public."user" VALUES ('michaelelza', '5P1BJQ40A9', 'student');
+INSERT INTO public."user" VALUES ('leontobin', 'HHZWGT8PH9D', 'student');
+INSERT INTO public."user" VALUES ('alyssalandry', 'WC6KX744', 'student');
+INSERT INTO public."user" VALUES ('vickipanning', 'LYU5PE91IGH', 'student');
+INSERT INTO public."user" VALUES ('jeffzielinski', 'TQXJJQFWVZ', 'student');
+INSERT INTO public."user" VALUES ('coreylloyd', 'VTP21I4HCK3', 'student');
+INSERT INTO public."user" VALUES ('gracemccauley', '0JUI48H4IN71', 'student');
+INSERT INTO public."user" VALUES ('williamcarroll', 'I7MTBQ3RPISM', 'student');
+
+
+--
+-- TOC entry 3232 (class 2606 OID 16889)
+-- Name: course_priority course priority_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.course_priority
+    ADD CONSTRAINT "course priority_pkey" PRIMARY KEY (pid);
+
+
+--
+-- TOC entry 3208 (class 2606 OID 16727)
+-- Name: course course_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.course
+    ADD CONSTRAINT course_pkey PRIMARY KEY (cid);
+
+
+--
+-- TOC entry 3211 (class 2606 OID 16734)
+-- Name: faculty faculty_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.faculty
+    ADD CONSTRAINT faculty_pkey PRIMARY KEY (fid);
+
+
+--
+-- TOC entry 3213 (class 2606 OID 16741)
+-- Name: grade grade_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.grade
+    ADD CONSTRAINT grade_pkey PRIMARY KEY (username, cid);
+
+
+--
+-- TOC entry 3215 (class 2606 OID 16746)
+-- Name: group group_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."group"
+    ADD CONSTRAINT group_pkey PRIMARY KEY (gid);
+
+
+--
+-- TOC entry 3219 (class 2606 OID 16930)
+-- Name: optional_course_enrollment optional course enrollment_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.optional_course_enrollment
+    ADD CONSTRAINT "optional course enrollment_pkey" PRIMARY KEY (username, cid);
+
+
+--
+-- TOC entry 3217 (class 2606 OID 16753)
+-- Name: optional_course optional course_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.optional_course
+    ADD CONSTRAINT "optional course_pkey" PRIMARY KEY (cid);
+
+
+--
+-- TOC entry 3221 (class 2606 OID 16767)
+-- Name: staff staff_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.staff
+    ADD CONSTRAINT staff_pkey PRIMARY KEY (username);
+
+
+--
+-- TOC entry 3223 (class 2606 OID 16774)
+-- Name: student student_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.student
+    ADD CONSTRAINT student_pkey PRIMARY KEY (username);
+
+
+--
+-- TOC entry 3226 (class 2606 OID 16781)
+-- Name: studentenrollment studentenrollment _pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.studentenrollment
+    ADD CONSTRAINT "studentenrollment _pkey" PRIMARY KEY (username, fid, year);
+
+
+--
+-- TOC entry 3228 (class 2606 OID 16788)
+-- Name: teacher teacher_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.teacher
+    ADD CONSTRAINT teacher_pkey PRIMARY KEY (username);
+
+
+--
+-- TOC entry 3230 (class 2606 OID 16795)
+-- Name: user user_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."user"
+    ADD CONSTRAINT user_pkey PRIMARY KEY (username);
+
+
+--
+-- TOC entry 3209 (class 1259 OID 16801)
+-- Name: fid_fk; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX fid_fk ON public.course USING btree (fid);
+
+
+--
+-- TOC entry 3224 (class 1259 OID 16872)
+-- Name: fki_fid_fk; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX fki_fid_fk ON public.studentenrollment USING btree (fid);
+
+
+--
+-- TOC entry 3241 (class 2606 OID 16832)
+-- Name: optional_course cid_fk; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.optional_course
+    ADD CONSTRAINT cid_fk FOREIGN KEY (cid) REFERENCES public.course(cid);
+
+
+--
+-- TOC entry 3233 (class 2606 OID 16796)
+-- Name: course course_fid_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.course
+    ADD CONSTRAINT course_fid_fkey FOREIGN KEY (fid) REFERENCES public.faculty(fid);
+
+
+--
+-- TOC entry 3234 (class 2606 OID 16802)
+-- Name: course course_teacher_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.course
+    ADD CONSTRAINT course_teacher_fkey FOREIGN KEY (teacher) REFERENCES public.teacher(username);
+
+
+--
+-- TOC entry 3236 (class 2606 OID 16807)
+-- Name: faculty faculty_chief_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.faculty
+    ADD CONSTRAINT faculty_chief_fkey FOREIGN KEY (chief) REFERENCES public.teacher(username);
+
+
+--
+-- TOC entry 3248 (class 2606 OID 16867)
+-- Name: studentenrollment fid_fk; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.studentenrollment
+    ADD CONSTRAINT fid_fk FOREIGN KEY (fid) REFERENCES public.faculty(fid);
+
+
+--
+-- TOC entry 3237 (class 2606 OID 16812)
+-- Name: grade grade_cid_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.grade
+    ADD CONSTRAINT grade_cid_fkey FOREIGN KEY (cid) REFERENCES public.course(cid);
+
+
+--
+-- TOC entry 3238 (class 2606 OID 16817)
+-- Name: grade grade_username_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.grade
+    ADD CONSTRAINT grade_username_fkey FOREIGN KEY (username) REFERENCES public.student(username);
+
+
+--
+-- TOC entry 3239 (class 2606 OID 16822)
+-- Name: group group_faculty_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."group"
+    ADD CONSTRAINT group_faculty_fkey FOREIGN KEY (faculty) REFERENCES public.faculty(fid);
+
+
+--
+-- TOC entry 3242 (class 2606 OID 16837)
+-- Name: optional_course_enrollment optional course enrollment_cid_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.optional_course_enrollment
+    ADD CONSTRAINT "optional course enrollment_cid_fkey" FOREIGN KEY (cid) REFERENCES public.optional_course(cid);
+
+
+--
+-- TOC entry 3243 (class 2606 OID 16924)
+-- Name: optional_course_enrollment optional course enrollment_username_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.optional_course_enrollment
+    ADD CONSTRAINT "optional course enrollment_username_fkey" FOREIGN KEY (username) REFERENCES public.student(username);
+
+
+--
+-- TOC entry 3240 (class 2606 OID 16827)
+-- Name: optional_course optional course_username_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.optional_course
+    ADD CONSTRAINT "optional course_username_fkey" FOREIGN KEY (username) REFERENCES public.teacher(username);
+
+
+--
+-- TOC entry 3235 (class 2606 OID 16890)
+-- Name: course priority; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.course
+    ADD CONSTRAINT priority FOREIGN KEY (priority) REFERENCES public.course_priority(pid) NOT VALID;
+
+
+--
+-- TOC entry 3244 (class 2606 OID 16847)
+-- Name: staff staff_username_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.staff
+    ADD CONSTRAINT staff_username_fkey FOREIGN KEY (username) REFERENCES public."user"(username);
+
+
+--
+-- TOC entry 3245 (class 2606 OID 16852)
+-- Name: student student_group1_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.student
+    ADD CONSTRAINT student_group1_fkey FOREIGN KEY (group1) REFERENCES public."group"(gid);
+
+
+--
+-- TOC entry 3246 (class 2606 OID 16857)
+-- Name: student student_group2_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.student
+    ADD CONSTRAINT student_group2_fkey FOREIGN KEY (group2) REFERENCES public."group"(gid);
+
+
+--
+-- TOC entry 3247 (class 2606 OID 16862)
+-- Name: student student_username_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.student
+    ADD CONSTRAINT student_username_fkey FOREIGN KEY (username) REFERENCES public."user"(username);
+
+
+--
+-- TOC entry 3250 (class 2606 OID 16878)
+-- Name: teacher teacher_username_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.teacher
+    ADD CONSTRAINT teacher_username_fkey FOREIGN KEY (username) REFERENCES public."user"(username);
+
+
+--
+-- TOC entry 3249 (class 2606 OID 16873)
+-- Name: studentenrollment username_fk; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.studentenrollment
+    ADD CONSTRAINT username_fk FOREIGN KEY (username) REFERENCES public.student(username);
+
+
+-- Completed on 2022-05-07 21:10:14
+
+--
+-- PostgreSQL database dump complete
+--
+

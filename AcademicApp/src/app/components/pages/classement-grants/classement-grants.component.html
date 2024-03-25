@@ -1,0 +1,33 @@
+<div class="container" [style.padding]="pagePadding">
+    <img class="logo-icon" src="assets/logo.svg" [style.width]="logoWidth">
+    <div class="content" [style.padding]="contentPadding">
+       <div class="classement-part">
+           <h2>Classement</h2>
+            <h3>Table with students</h3>
+            <app-table
+              #groupTable
+              class="students-table" [headers]="tableHeaders" [objectsFromDb]="studentsData" [hasCheckbox]="false" [hasAction]="false"></app-table>
+        </div>
+        <div class="funding-part" >
+            <h2>Funding level</h2>
+            <label>
+                Minimum grade for grant
+                <br>
+                <input #gradeInput="ngModel" [(ngModel)]="gradeValue" ngModel name="gradeInput" class="list-box-small" type="text" [placeholder]="gradePlaceholder" required>
+            </label>
+            <br><br>
+            <label>
+                Money per person
+                <br>
+                <input #moneyInput="ngModel" [(ngModel)]="moneyValue" ngModel name="moneyInput" class="list-box-small" type="text" [placeholder]="moneyPlaceholder" required>
+            </label>
+            <br><br>
+            <app-button class="btn" [text]="'Send'" (click)="fillForm()"></app-button>
+            <br><br>
+            <p>*Everyone from each faculty will receive <br> the same sum and has a bigger average mark <br> than minimum grade</p>
+            <br>
+             <button class="btn-pr" (click)="assignStudents()" [hidden]="hiddenButton">Assign students to optionals</button>
+       </div>
+    </div>
+
+</div>

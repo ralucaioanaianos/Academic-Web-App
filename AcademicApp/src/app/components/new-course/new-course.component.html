@@ -1,0 +1,45 @@
+<div>
+  <h3>New Course</h3>
+  <br>
+  <div class="order">
+    <div>
+      <label class="bolder">Title</label>
+      <br>
+      <input type="text" placeholder="Input name of course">
+    </div>
+    <br>
+    <div>
+      <label class="bolder">Faculty</label>
+      <br>
+      <dropdown [placeholderText]="'Choose name of faculty'"></dropdown>
+    </div>
+  </div>
+  <br>
+  <div class="order">
+    <div>
+      <label class="bolder">Semester</label>
+      <br>
+      <dropdown [placeholderText]="'1-2'"></dropdown>
+    </div>
+    <br>
+    <div>
+      <label class="bolder">Credits</label>
+      <dropdown [placeholderText]="'1-8'"></dropdown>
+    </div>
+  </div>
+  <br>
+  <div class="order">
+    <div>
+      <input type="checkbox">
+      <label>Mandatory</label>
+    </div>
+    <div>
+      <input  type="checkbox">
+      <label>Optional</label>
+    </div>
+  </div>
+  <br>
+  <div>
+    <button>Create/Update course</button>
+  </div>
+</div>

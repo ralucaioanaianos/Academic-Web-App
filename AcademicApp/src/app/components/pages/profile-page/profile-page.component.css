@@ -1,0 +1,93 @@
+.logo-icon{
+    position: relative;
+    display: block;
+    margin: auto;
+}
+
+.circle {
+  border-radius: 50%;
+  width: 153px;
+  height: 151px;
+  background: #C4C4C4;
+}
+
+.first-column{
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 0px;
+  gap: 29px;
+
+  width: 236px;
+  height: 155px;
+}
+
+.profile-picture{
+  border-radius: 50%;
+  background-color: #ffffff;
+  width: 131px;
+  height: 131px;
+  border: 1px solid black;
+
+  display: flex;
+  box-sizing: border-box;
+}
+
+.second-column{
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 0px;
+  gap: 25px;
+
+  width: 237px;
+  height: 151px;
+}
+
+.text-center{
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 32px;
+  line-height: 39px;
+}
+
+.profile-container{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 0px;
+  gap: 39px;
+}
+
+.grid{
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  padding: 0px;
+  gap: 48px;
+}
+
+.home-address{
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 0px;
+  width: 784px;
+  height: 63px;
+}
+
+.list-box-home-address{
+  width: 784px;
+  height: 43px;
+  border-radius: 10px;
+  border: 1px solid black;
+}
+
+.list-box-small{
+  width: 236px;
+  height: 43px;
+  border-radius: 10px;
+  border: 1px solid black;
+}

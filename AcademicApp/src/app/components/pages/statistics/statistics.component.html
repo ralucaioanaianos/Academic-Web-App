@@ -1,0 +1,34 @@
+<div class="container" [style.padding]="pagePadding">
+  <img class="logo-icon" src="assets/logo.svg" [style.width]="logoWidth">
+  <div class="content" [style.padding]="contentPadding">
+    <div class="same-row">
+      <dropdown #teacherDd
+                [options]="teacherOptions"
+                placeholderText="All teachers"
+                labelText="Teacher"
+                [shownProperty]="nameOfTPropertyToShow"
+                [idProperty]="idTProperty"
+                (change)='onTeacherOptionChanged()'>
+      </dropdown>
+      <dropdown #courseDd
+                [options]="courseOptions"
+                placeholderText="All courses"
+                labelText="Course"
+                [shownProperty]="nameOfCPropertyToShow"
+                [idProperty]="idCProperty">
+      </dropdown>
+    </div>
+    <br>
+    <button class="send-button" [disabled]="disableButtons" (click)="onClickShowChart()">Show chart</button>
+    <br>
+    <div class="same-row">
+      <div *ngIf="chart">
+        <canvas id="canvas">{{ chart }}</canvas>
+      </div>
+      <div *ngIf="chart">
+        <canvas id="canvas2">{{ chart }}</canvas>
+      </div>
+    </div>
+  </div>
+
+</div>

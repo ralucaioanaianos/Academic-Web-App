@@ -1,0 +1,12 @@
+<input type="file" class="file-input"
+       (change)="onFileSelected($event)" #fileUpload>
+
+<div class="file-upload box">
+
+  <button (click)="fileUpload.click()">
+    ...or select from PC
+  </button>
+
+  {{fileName || "No file uploaded yet."}}
+
+</div>

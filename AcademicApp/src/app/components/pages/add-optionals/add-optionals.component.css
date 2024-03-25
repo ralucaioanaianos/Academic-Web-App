@@ -1,0 +1,22 @@
+.logo-icon{
+    position: relative;
+    display: block;
+    margin: auto;
+}
+
+.content{
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.text-color{
+  color: #50ACF9;
+  font-weight: bold;
+}
+
+.buttons{
+  display:flex;
+  flex-direction: row;
+  justify-content: space-between;
+}

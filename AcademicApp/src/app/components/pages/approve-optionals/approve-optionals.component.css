@@ -1,0 +1,16 @@
+.logo-icon{
+    position: relative;
+    display: block;
+    margin: auto;
+}
+
+.content{
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.text-color{
+    color: #50ACF9;
+    font-weight: bold;
+}

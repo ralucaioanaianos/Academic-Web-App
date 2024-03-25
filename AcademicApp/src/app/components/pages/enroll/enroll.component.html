@@ -1,0 +1,35 @@
+<div class="container" [style.padding]="pagePadding">
+    <img class="logo-icon" src="assets/logo.svg" [style.width]="logoWidth">
+    <div class="content"  [style.padding]="contentPadding">
+        <div class="same-row">
+            <dropdown #facultyDd 
+                [options]="facultiesOptions" 
+                labelText="Faculty"
+                [shownProperty] = "nameOfFPropertyToShow"
+                [idProperty]="idFPropery"
+                (change)='onFacultyOptionChanged()'>
+            </dropdown>
+            <dropdown #yearDd 
+                [options]="yearsOptions" 
+                labelText="Year"
+                [shownProperty] = "nameOfYPropertyToShow"
+                [idProperty]="idYPropery">
+            </dropdown>
+        </div>
+        <button [disabled]="disableButtons" (click)="onClickAddFacultyToTable()">Add to enrollment table</button>
+        <app-table 
+                #facultyTable
+                [headers]="enrollmentsHeader" [objectsFromDb]="tableData" [hasCheckbox]="false" [hasAction]="false"
+        ></app-table>
+
+        <div class="same-row">
+            <button [disabled]="disableButtons" (click)="onClickClear()">Clear</button>
+            <button [disabled]="disableButtons" (click)="onClickSend()">Send</button>
+        </div>
+            
+
+        <p>If you want to enroll at the same faculty for 2 years or you want to enroll into 2 faculties at the same time, please <span class="text-color">select the two options</span> and then press Enroll. If you only want to enroll in a year/a faculty, select only one option.</p>
+        
+     </div>
+
+</div>

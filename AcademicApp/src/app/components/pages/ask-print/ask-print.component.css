@@ -1,0 +1,105 @@
+.logo-icon{
+    position: relative;
+    display: block;
+    margin: auto;
+}
+
+.order{
+  display: flex;
+  flex-direction: row;
+  gap:50px;
+}
+
+table, th{
+  border-collapse: collapse;
+  border: 1px solid black;
+  padding: 5px;
+}
+
+table{
+  width: 812px;
+}
+
+th{
+  background-color: #D5DBDF;
+  text-align: center;
+}
+
+td{
+  border-collapse: collapse;
+  border: 1px inset #B9B9B9;
+}
+
+
+.filter{
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  padding: 0px;
+  gap: 54px;
+
+  width: 661px;
+  height: 63px;
+
+}
+
+.input-option{
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 0px;
+}
+
+.input-faculty-size{
+  width: 280px;
+  height: 43px;
+}
+
+.input-year-size{
+  width: 92px;
+  height: 43px;
+
+}
+
+.input-group-size{
+  width: 181px;
+  height: 43px;
+}
+
+.content{
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 0px;
+  gap: 34px;
+}
+
+.grid{
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding-left: 150px;
+  gap: 50px;
+}
+
+.print-button{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 8px 59px;
+  gap: 10px;
+  color: white;
+  width: 167px;
+  height: 40px;
+  border: 1px solid #50ACF9;
+  background-color: #50ACF9;
+  border-radius: 7px;
+}
+
+.same-row{
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+}
+

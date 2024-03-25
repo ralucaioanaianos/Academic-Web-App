@@ -1,0 +1,33 @@
+STUDENTS
+Student with one faculty:
+user: letitialanderos
+pass: 1X3S9S8FR9
+
+Student with 2 faculties:
+user: kathyprado
+pass: A9ZHIN4TZB4
+
+TEACHERS
+
+Normal teacher with one optional:
+user: erincraft
+pass: TO33NKNPYX
+
+Normal teacher with 2 optionals:
+user: michaelsmith
+pass: BO8XEAXQOCBF
+
+Chief:
+user: francesparker
+pass: 2PX8U4ERBRJ
+
+
+STAFF:
+
+The one with the button:
+user: cathygeorge
+pass: 9JMQGAKFNM
+
+Normal one:
+user: susanzappala
+pass: Q8RCS01EX

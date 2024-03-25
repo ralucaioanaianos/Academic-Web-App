@@ -1,0 +1,42 @@
+<div class="container" [style.padding]="pagePadding">
+  <img class="logo-icon" src="assets/logo.svg" [style.width]="logoWidth">
+  <div class="content" [style.padding]="contentPadding">
+    <div class="grid">
+      <div class="filter">
+        <div class="input-option">
+          <div class="same-row">
+          <dropdown #facultyDd
+                    [options]="facultiesOptions"
+                    labelText="Faculty"
+                    [placeholderText]="'All faculties'"
+                    [shownProperty] = "nameOfFPropertyToShow"
+                    [idProperty]="idFProperty"
+                    (change)='onFacultyOptionChanged()'>
+          </dropdown>
+          <dropdown #yearDd
+                    [options]="yearsOptions"
+                    labelText="Year"
+                    [placeholderText]="'All years'"
+                    [shownProperty] = "nameOfYPropertyToShow"
+                    [idProperty]="idYProperty"
+                    (change)='onYearOptionChanged()'>
+          </dropdown>
+          <dropdown #groupDd
+                    [options]="groupsOptions"
+                    labelText="Group"
+                    [placeholderText]="'All groups'"
+                    [shownProperty] = "nameOfGPropertyToShow"
+                    [idProperty]="idGProperty"
+                    (change)='onGroupOptionChanged()'>
+          </dropdown>
+        </div>
+        </div>
+      </div>
+      <app-table
+        #groupTable
+        [headers]="groupsHeader" [objectsFromDb]="tableData" [hasCheckbox]="false" [hasAction]="false"
+      ></app-table>
+      <button class="print-button" (click)="print()">Print</button>
+    </div>
+  </div>
+</div>

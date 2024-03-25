@@ -1,0 +1,21 @@
+<div class="container" [style.padding]="pagePadding">
+    <img class="logo-icon" src="assets/logo.svg" [style.width]="logoWidth">
+    <div class="content" [style.padding]="contentPadding">
+        <dropdown #facultyDd 
+            [options]="options" 
+            labelText="Faculty"
+            [shownProperty] = "nameOfPropertyToShow"
+            idProperty="id"
+            [hasAll]="false"
+            (change)='onOptionChanged()'>
+        </dropdown>
+        <app-table #table [headers]="headers" [objectsFromDb]="tableData" [hasCheckbox]="false" [hasAction]="false"></app-table>
+        <div class="text">
+            <p> If your grade is -1 it means the teacher didn't grade you yet.</p>
+            <!-- <p> ** <span [style]="blueText">Type activity</span> </p>
+            <p> M - mandatory </p>
+            <p> O - optional </p> -->
+        </div>
+    </div>
+
+</div>

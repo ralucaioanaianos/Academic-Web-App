@@ -1,0 +1,12 @@
+.logo-icon{
+    position: relative;
+    display: block;
+    margin: auto;
+}
+
+.content{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    gap: 1rem;
+}

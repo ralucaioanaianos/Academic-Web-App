@@ -1,0 +1,26 @@
+<div class="container" id="" [style.padding]="pagePadding">
+    <img class="logo-icon" src="assets/logo.svg" [style.width]="logoWidth">
+    <div class="content" [style.padding]="contentPadding">
+        <div class="drop-component" style="text-align: center;">
+            <h2 class="file-upload-position">File upload</h2>
+            <drag-and-drop #fileTable></drag-and-drop>
+            <app-button class="btn" [text]="'Upload'" (click)="onUpdateClicked()"></app-button>
+
+        </div>
+        <div class="generate-contract-component" style="text-align: center;">
+            <h2>Generate contract</h2>
+            <h3>Faculty</h3>
+            <dropdown #facultyDd 
+                [options]="facultiesOptions" 
+                labelText="Faculty"
+                [shownProperty] = "nameOfFPropertyToShow"
+                [idProperty]="idFPropery"
+                [hasAll]="false"
+                (change)='onOptionChanged()'>
+                
+            </dropdown>            
+        <app-button class="btn" [text]="'Generate'" (click)="exportAsPDF($event)"></app-button>
+
+        </div>
+    </div>
+</div>

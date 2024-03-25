@@ -1,0 +1,64 @@
+<div class="container" [style.padding]="pagePadding">
+  <img class="logo-icon" src="assets/logo.svg" [style.width]="logoWidth">
+  <div class="content" [style.padding]="contentPadding">
+    <form #f="ngForm" (ngSubmit)="onSubmit(f)" novalidate>
+      <div class="profile-container">
+        <h2 class="text-center">Your personal information </h2>
+        <div class="grid">
+          <img class="profile-picture" [src]="'assets/' + role + '.png'" />
+          <div class="first-column">
+            <div>
+              <label>
+                Name
+                <br>
+                <input #nameInput="ngModel" [(ngModel)]="nameValue" ngModel name="nameInput" class="list-box-small" type="text" [placeholder]="namePlaceholder" required>
+              </label>
+            </div>
+            <div>
+              <label>
+                Surname
+                <br>
+                <input #surnameInput="ngModel" [(ngModel)]="surnameValue" ngModel name="surnameInput" class="list-box-small" type="text" [placeholder]="surnamePlaceholder" required>
+              </label>
+            </div>
+            <div>
+              <label>
+                Phone
+                <br>
+                <input #phoneInput="ngModel" [(ngModel)]="phoneValue" ngModel name="phoneInput" class="list-box-small" type="text" [placeholder]="phonePlaceholder" required>
+              </label>
+            </div>
+          </div>
+          <br>
+          <div class="second-column">
+            <div>
+              <label>
+                Email
+                <br>
+                <input #emailInput="ngModel" [(ngModel)]="emailValue" ngModel name="emailInput" class="list-box-small" type="text" [placeholder]="emailPlaceholder" required>
+              </label>
+            </div>
+            <div>
+              <label>
+                CNP
+                <br>
+                <input #cnpInput="ngModel" [(ngModel)]="cnpValue" ngModel name="cnpInput" class="list-box-small" type="text" [placeholder]="cnpPlaceholder" required>
+              </label>
+            </div>
+          </div>
+        </div>
+        <br>
+        <div class="home-address">
+          <label>
+            Home address
+            <br>
+            <input #homeInput="ngModel" [(ngModel)]="homeValue" ngModel  name="homeInput" class="list-box-home-address" type="text" [placeholder]="homePlaceholder" required>
+          </label>
+        </div>
+        <h6 [hidden]="forScholarship">Bursier: {{bursierText}}</h6>
+        <app-button text="Submit" ></app-button>
+      </div>
+    </form>
+  </div>
+  
+</div>

@@ -1,0 +1,26 @@
+<div class="sidemenu" [style.width]="sidemenuWidth" [style.padding]="sidemenuPadding">
+    <div class="profile-container">
+        <p class="profile-name">{{name}}</p>
+
+        <img class="profile-picture" src="assets/student.png" />
+
+        <div class="profile-type">Student Profile</div>
+
+    </div>
+
+    <ul class="sidemenu-nav-list-items">
+        <li class="sidemenu-nav-item" *ngFor="let data of navData">
+            <a class="sidemenu-nav-link" routerLinkActive="active" [routerLink]="data.routeLink">
+                <img class="sidemenu-link-icon" [src]="data.icon">
+                <span class="sidemenu-link-text">{{data.label}}</span>
+            </a>
+        </li>
+    </ul>
+
+    <div class="log-off">
+        <a class="log-off-link" [routerLink]="['/login']" (click)="logout()">
+            <img class="sidemenu-link-icon" src="assets/power.svg">
+            <span class="sidemenu-link-text">Log off</span>
+        </a>
+    </div>
+</div>
