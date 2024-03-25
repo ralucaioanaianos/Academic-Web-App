@@ -5,12 +5,12 @@ A website made in the same style as academic info.
   - [Manual](https://docs.google.com/document/d/1e8axditgBMZlUGS3NOVhru7hVr_BzSsGQet7eDuZqpA/edit#)
 
 ## Colaborators
+  - [Ianos Raluca](https://github.com/ralucaioanaianos)
   - [Gherghel Vlad](https://github.com/Gherghel-Vlad)
   - [Herlea Stefan](https://github.com/913-Herlea-Stefan-Alexandru)
   - [Hincu Alice](https://github.com/AliceHincu)
   - [Hriscu Ocatavia](https://github.com/octaviaah)
   - [Hutupasu Stefana](https://github.com/913-stefana-hutupasu)
-  - [Ianos Raluca](https://github.com/ralucaioanaianos)
 
 ## Diagrams
   - [Class diagrams](https://github.com/Gherghel-Vlad/ISS-Academic-Web-App/tree/main/Diagrams/Class-Diagram)
